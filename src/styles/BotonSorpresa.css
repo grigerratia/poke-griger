@@ -3,6 +3,7 @@
 	border: 2px solid #8611fc;
 	transition: all 0.2s;
 	color: #fcf4ff;
+	cursor: pointer;
 	&:hover {
 		background: none;
 		border: 2px solid #8611fc;

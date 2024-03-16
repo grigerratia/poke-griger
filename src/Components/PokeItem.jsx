@@ -5,6 +5,8 @@ import "../styles/PokeItem.css";
 const PokeItem = ({ data }) => {
 	const [dataP, setDataP] = useState();
 	const [id, setId] = useState("");
+	let image1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" +id +".gif";
+	let image2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+id+".png";
 
 	const context = useContext(MiContexto)
 	const { setDataCard, setVerPokeList } = context
@@ -14,13 +16,14 @@ const PokeItem = ({ data }) => {
 		setVerPokeList(false)
 	}
 
+	
 	useEffect(() => {
 		fetch(data.url)
-			.then((res) => res.json())
-			.then((datos) => {
-				setDataP(datos);
-				setId(datos.id);
-			});
+		.then((res) => res.json())
+		.then((datos) => {
+			setDataP(datos);
+			setId(datos.id);
+		});
 	});
 
 	return (
@@ -31,12 +34,9 @@ const PokeItem = ({ data }) => {
 			</div>
 			<picture>
 				<img
-					src={
-						"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" +
-						id +
-						".gif"
-					}
-					alt='Pikachu'
+					src={image1}
+					onerror={"this.src='../../public/img/pokeball-icon.png'"}
+					alt={dataP?.name}
 				/>
 			</picture>
 		</div>

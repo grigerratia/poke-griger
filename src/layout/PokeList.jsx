@@ -8,8 +8,6 @@ const PokeList = () => {
 	const context = useContext(MiContexto);
 	const {filteredList} = context
 
-	console.log(filteredList);
-
 	let [listPokemons, setListPokemons] = useState([]);
 
 	useEffect(() => {
