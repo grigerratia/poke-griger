@@ -1,0 +1,10 @@
+.botonSorpresa button {
+	background: linear-gradient(to bottom right, #b974ff, #8611fc, #52069e);
+	border: 2px solid #8611fc;
+	transition: all 0.2s;
+	color: #fcf4ff;
+	&:hover {
+		background: none;
+		border: 2px solid #8611fc;
+	}
+}

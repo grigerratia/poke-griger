@@ -1,0 +1,103 @@
+:root {
+	--normal: #888888;
+	--fighting: #d7db94;
+	--flying: #60f4ff;
+	--poison: #52008c;
+	--ground: #767600;
+	--rock: #2f2c12;
+	--bug: #afe495;
+	--ghost: #bcbcbc;
+	--steel: #bcd9de;
+	--fire: #ff7402;
+	--water: #00ddff;
+	--grass: #0c930e;
+	--electric: #818132;
+	--psychic: #ff69df;
+	--ice: #f5feff;
+	--dragon: #ff1919;
+	--dark: #313131;
+	--fairy: #43aebe;
+	--unknown: #d5d5d5;
+	--shadow: #121212;
+
+	.normal {
+		border: 1px solid var(--normal);
+		box-shadow: 4px 4px 15px var(--normal);
+	}
+	.fighting {
+		border: 1px solid var(--fighting);
+		box-shadow: 4px 4px 15px var(--fighting);
+	}
+	.flying {
+		border: 1px solid var(--flying);
+		box-shadow: 4px 4px 15px var(--flying);
+	}
+	.poison {
+		border: 1px solid var(--poison);
+		box-shadow: 4px 4px 15px var(--poison);
+	}
+	.ground {
+		border: 1px solid var(--ground);
+		box-shadow: 4px 4px 15px var(--ground);
+	}
+	.rock {
+		border: 1px solid var(--rock);
+		box-shadow: 4px 4px 15px var(--rock);
+	}
+	.bug {
+		border: 1px solid var(--bug);
+		box-shadow: 4px 4px 15px var(--bug);
+	}
+	.ghost {
+		border: 1px solid var(--ghost);
+		box-shadow: 4px 4px 15px var(--ghost);
+	}
+	.steel {
+		border: 1px solid var(--steel);
+		box-shadow: 4px 4px 15px var(--steel);
+	}
+	.fire {
+		border: 1px solid var(--fire);
+		box-shadow: 4px 4px 15px var(--fire);
+	}
+	.water {
+		border: 1px solid var(--water);
+		box-shadow: 4px 4px 15px var(--water);
+	}
+	.grass {
+		border: 1px solid var(--grass);
+		box-shadow: 4px 4px 15px var(--grass);
+	}
+	.electric {
+		border: 1px solid var(--electric);
+		box-shadow: 4px 4px 15px var(--electric);
+	}
+	.psychic {
+		border: 1px solid var(--psychic);
+		box-shadow: 4px 4px 15px var(--psychic);
+	}
+	.ice {
+		border: 1px solid var(--ice);
+		box-shadow: 4px 4px 15px var(--ice);
+	}
+	.dragon {
+		border: 1px solid var(--dragon);
+		box-shadow: 4px 4px 15px var(--dragon);
+	}
+	.dark {
+		border: 1px solid var(--dark);
+		box-shadow: 4px 4px 15px var(--dark);
+	}
+	.fairy {
+		border: 1px solid var(--fairy);
+		box-shadow: 4px 4px 15px var(--fairy);
+	}
+	.unknown {
+		border: 1px solid var(--unknown);
+		box-shadow: 4px 4px 15px var(--unknown);
+	}
+	.shadow {
+		border: 1px solid var(--shadow);
+		box-shadow: 4px 4px 15px var(--shadow);
+	}
+}

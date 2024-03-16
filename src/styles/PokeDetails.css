@@ -1,0 +1,111 @@
+@keyframes zoom-card {
+	0% {
+		margin-left: 100%;
+	}
+	100% {
+		margin-left: 0;
+	}
+}
+.pokeDetails {
+	position: absolute;
+	background-color: #1f1f1ff7;
+	display: grid;
+	place-content: center;
+	width: 100%;
+	height: 100vh;
+	animation: zoom-card 0.2s linear;
+
+	& .pokeDetailContainer {
+		width: max-content;
+		display: grid;
+		gap: 4em;
+		padding: 2em;
+		margin: 4em;
+
+		& .pokeDetailMain {
+			display: flex;
+			gap: 4em;
+
+			& .pokemon {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				& .pokemonImage {
+					display: flex;
+					gap: 2em;
+					align-items: center;
+					& .imageP img {
+						filter: drop-shadow(0px 0 32px #a44c31);
+					}
+				}
+			}
+
+			& .pokemonDetailsCard {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				gap: 2em;
+				border-radius: 8px;
+				padding: 2em;
+				background-color: #3e3e3e;
+
+				& .nameNum {
+					display: flex;
+					justify-content: space-between;
+					& h3 {
+						margin: 0;
+						text-transform: capitalize;
+					}
+				}
+				& .pokDetTipos {
+					& h4 {
+						margin: 0;
+					}
+					& span {
+						text-transform: capitalize;
+					}
+				}
+				& .pokeDescription {
+					& h4 {
+						margin: 0;
+					}
+					& p {
+						width: 300px;
+						margin: 0;
+						height: 100px;
+						overflow-y: scroll;
+					}
+				}
+				& .pokemonCarateristicas {
+					display: grid;
+					grid-template-columns: 1fr 1fr 1fr;
+					gap: 1em;
+					border-radius: 8px;
+					padding: 1em;
+					background-color: #484747;
+				}
+				& .pokeDebilidad {
+					& h4 {
+						margin: 0;
+					}
+				}
+			}
+		}
+		& .beforeNextPokemon {
+			display: flex;
+			justify-content: space-between;
+			& .beNePo {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.salirPokeDetails {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 2em;
+	cursor: pointer;
+}

@@ -1,0 +1,17 @@
+.pokemonFigth {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 1em;
+	width: 60%;
+	border-radius: 8px;
+	padding: 1em;
+	background-color: #4d4d4d19;
+
+	& h4 {
+		margin: 0;
+	}
+	& span {
+		font-style: italic;
+		color: #ec3232;
+	}
+}

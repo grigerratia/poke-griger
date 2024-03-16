@@ -1,0 +1,55 @@
+main {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 6em 8em;
+	align-items: center;
+
+	& .botones {
+		display: flex;
+		gap: 4rem;
+		margin-bottom: 2em;
+	}
+
+	& button,
+	select {
+		padding: 1em;
+		border-radius: 8px;
+		font-size: 16px;
+		border: 1px solid black;
+		transition: all 0.2s;
+
+		&:active {
+			transform: scale(1.1);
+		}
+	}
+
+	& .main-d {
+		padding-left: 8em;
+
+		& .cards-layout {
+			margin-top: 4em;
+		}
+	}
+}
+
+.titlePage {
+	color: white;
+	line-height: 4em;
+
+	& h1 {
+		font-size: 4em;
+		margin: 0;
+
+		& span {
+			background: linear-gradient(to bottom right, #ffdcdc, #fc1111, #870505);
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+
+	& p {
+		font-size: 1.5em;
+		line-height: 1.2em;
+		color: #717171;
+	}
+}

@@ -1,0 +1,43 @@
+.buscador {
+	border-bottom: 2px solid #fc1111;
+	border-radius: 8px;
+	border-color: #fc1111;
+	width: max-content;
+	display: flex;
+	flex-direction: row-reverse;
+	box-shadow: 0 0px 50px #4a030321;
+	justify-self: center;
+	margin-bottom: 1em;
+
+	& span {
+		width: max-content;
+		height: max-content;
+		padding: 1.5em;
+		display: flex;
+		align-items: center;
+		border-radius: 8px 0 0 8px;
+
+		& img {
+			width: 30px;
+		}
+	}
+	& input {
+		border: none;
+		border-radius: 0 8px 8px 0;
+		background-color: #00000000;
+		color: azure;
+		outline: none;
+		transition: all 0.2s;
+
+		font-size: 1.5em;
+	}
+	& input::placeholder {
+		color: #4f4f4f;
+	}
+	& input:focus ~ span {
+		background-color: #110f0f;
+	}
+	& input:focus {
+		background-color: #110f0f;
+	}
+}

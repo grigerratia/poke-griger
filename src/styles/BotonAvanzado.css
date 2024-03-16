@@ -1,0 +1,15 @@
+.botonAvanzado button {
+	border: none;
+	padding: 0 0 2em 0;
+	transition: all 0.2s;
+	cursor: pointer;
+
+	background: linear-gradient(to bottom right, #ffdcdc, #fc1111, #b31212);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	&:hover {
+		background: linear-gradient(to bottom right, #870505, #fc1111, #ffdcdc);
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}

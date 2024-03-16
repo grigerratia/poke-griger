@@ -1,0 +1,26 @@
+.pokeList {
+	width: max-content;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr;
+	gap: 1.5em;
+}
+
+.listIndex {
+	display: flex;
+	margin-top: 1em;
+
+	& div {
+		padding: 4px;
+		cursor: pointer;
+		color: #767676;
+		transition: all 0.1s;
+
+		&:hover {
+			color: #fff;
+		}
+		&:active {
+			color: #d02222;
+		}
+	}
+}
