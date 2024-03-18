@@ -22,7 +22,7 @@ function App() {
 						</MiContextoProveedor>
 					}
 				/>
-				<Route path='/pokemon/:id' element={<Detalle />} />
+				{/* <Route path='/pokemon/:id' element={<Detalle />} /> */}
 			</Routes>
 		</BrowserRouter>
 	);

@@ -19,32 +19,34 @@ const PokeDetails = () => {
 		console.log();
 	};
 	return (
-		<div className='pokeDetails'>
-			<div className='pokeDetailContainer'>
-				<div className='pokeDetailMain'>
-					<div className='pokemon'>
-						<div className='pokemonImage'>
-							<div className='evBefore'>
-								<Evolucion />
+		<div className="contentPokeDetails">
+			<div className='pokeDetails'>
+				<div className='pokeDetailContainer'>
+					<div className='pokeDetailMain'>
+						<div className='pokemon'>
+							<div className='pokemonImage'>
+								<div className='evBefore'>
+									<Evolucion />
+								</div>
+								<div className='imageP'>
+									<img src={imgURL + dataCard.id + ".png"} alt='' />
+								</div>
+								<div className='evNext'>
+									<Evolucion />
+								</div>
 							</div>
-							<div className='imageP'>
-								<img src={imgURL + dataCard.id + ".png"} alt='' />
-							</div>
-							<div className='evNext'>
-								<Evolucion />
-							</div>
+							<PokemonFigth />
 						</div>
-						<PokemonFigth />
+						<PokeDetailsCard />
 					</div>
-					<PokeDetailsCard />
+					<div className='beforeNextPokemon'>
+						<div className='beNePo beforeP'>Before</div>
+						<div className='beNePo nextP'>Next</div>
+					</div>
 				</div>
-				<div className='beforeNextPokemon'>
-					<div className='beNePo beforeP'>Before</div>
-					<div className='beNePo nextP'>Next</div>
+				<div className='salirPokeDetails' onClick={togglePoDe}>
+					X
 				</div>
-			</div>
-			<div className='salirPokeDetails' onClick={togglePoDe}>
-				X
 			</div>
 		</div>
 	);

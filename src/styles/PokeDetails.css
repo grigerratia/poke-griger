@@ -6,21 +6,30 @@
 		margin-left: 0;
 	}
 }
-.pokeDetails {
+
+.contentPokeDetails{
 	position: absolute;
+	display: grid;
+	padding: 3em;
+	place-content: center;
+	left: 50%;
+	transform: translateX(-50%);
+	animation: zoom-card 0.2s linear;
+}
+
+.pokeDetails {
 	background-color: #1f1f1ff7;
 	display: grid;
 	place-content: center;
-	width: 100%;
-	height: 100vh;
-	animation: zoom-card 0.2s linear;
+	width: max-content;
+	height: max-content;
+	border-radius: 8px;
 
 	& .pokeDetailContainer {
 		width: max-content;
 		display: grid;
 		gap: 4em;
 		padding: 2em;
-		margin: 4em;
 
 		& .pokeDetailMain {
 			display: flex;

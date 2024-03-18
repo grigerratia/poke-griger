@@ -1,9 +1,11 @@
 .pokeList {
-	width: max-content;
+	width: 600px;
+	height: 370px;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr 1fr;
 	gap: 1.5em;
+
 }
 
 .listIndex {

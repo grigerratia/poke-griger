@@ -15,10 +15,10 @@ const PokeList = () => {
 	useEffect(() => {
 		filteredList === false
 			? getPokemon("")
-					.then((res) => res.json())
-					.then((data) => {
-						setListPokemons(data.results);
-					})
+				.then((res) => res.json())
+				.then((data) => {
+					setListPokemons(data.results);
+				})
 			: setListPokemons(filteredList);
 	}, [filteredList]);
 

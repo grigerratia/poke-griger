@@ -19,13 +19,14 @@ const PokeCard = () => {
 			: pokeDet.setVerPokeDe(true);
 	};
 
-	const close = ()=> {
+	const close = () => {
 		pokeDet.setVerPokeList(true)
 	}
 
 	return (
 		<>
 			<div
+				key={types[0].type.name}
 				className={"content-card" + " " + types[0].type.name}
 				onClick={togglePoDe}>
 				<picture>
