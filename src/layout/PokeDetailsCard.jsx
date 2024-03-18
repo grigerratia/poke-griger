@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MiContexto } from "../context/context";
 
 const PokeDetailsCard = () => {
@@ -7,18 +7,23 @@ const PokeDetailsCard = () => {
 	const { types } = dataCard;
 	const [description, setDescription] = useState("");
 
-	fetch(dataCard.species.url).then((res) => {
-		if (res.status !== 404) {
-			res.json().then((data) => {
-				setDescription(
-					() =>
+
+	useEffect(() => {
+		fetch(dataCard.species.url).then((res) => {
+			if (res.status !== 404) {
+				res.json().then((data) => {
+
+					setDescription(() =>
 						[...data.flavor_text_entries].find(
 							(el) => el.language.name === "es"
-						).flavor_text
-				);
-			});
-		}
-	});
+						)?.flavor_text
+					)
+
+				});
+			}
+		});
+	}, [])
+
 
 	// const description = data?.map((el) => el.flavor_text_entries);
 	// console.log(description);
@@ -31,12 +36,12 @@ const PokeDetailsCard = () => {
 			<div className='pokDetTipos'>
 				<h4>Tipo</h4>
 				{types?.map((el) => (
-					<span key={el.type.name}>{el.type.name}</span>
+					<span key={el.type.name} className="spanTypeName">{el.type.name.toUpperCase()}</span>
 				))}
 			</div>
 			<div className='pokeDescription'>
 				<h4>Descripción:</h4>
-				<p>{description}</p>
+				<p>{description ? description : "Sin información de esta especie."}</p>
 			</div>
 			<div className='pokemonCarateristicas'>
 				<div className='dtPk'>

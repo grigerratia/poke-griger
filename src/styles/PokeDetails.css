@@ -62,8 +62,9 @@
 					& h4 {
 						margin: 0;
 					}
-					& span {
+					& .spanTypeName {
 						text-transform: capitalize;
+						margin-right: 1em;
 					}
 				}
 				& .pokeDescription {
