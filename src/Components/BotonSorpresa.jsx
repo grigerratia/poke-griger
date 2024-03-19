@@ -6,7 +6,7 @@ import { MiContexto } from '../context/context'
 const BotonSorpresa = () => {
 
 	const context = useContext(MiContexto)
-	const { setDataCard, setVerPokeList } = context
+	const { setDataCard, setVerPokeDe } = context
 
 
 
@@ -19,7 +19,7 @@ const BotonSorpresa = () => {
 
 		const mostrarCard = async () => await data ? setDataCard(data) : mostrarSorpresa()
 		mostrarCard()
-		setVerPokeList(false)
+		setVerPokeDe(true)
 		return data
 	}
 

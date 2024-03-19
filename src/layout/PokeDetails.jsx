@@ -11,6 +11,7 @@ const PokeDetails = () => {
 
 	const pokeDet = useContext(MiContexto);
 	const { dataCard, pokeList } = pokeDet;
+	console.log(dataCard);
 
 	const togglePoDe = () => {
 		pokeDet.verPokeDe
