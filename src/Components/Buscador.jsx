@@ -9,14 +9,14 @@ const Buscador = () => {
 	const [pokemonSelec, setPokemonSelec] = useState("");
 	const [peticionRealizada, setPeticionRealizada] = useState(false);
 	const [pokemonList, setPokemonList] = useState(false);
-	const {filteredList,setFilteredList} = context
+	const { filteredList, setFilteredList } = context
 
 
 	fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
 		.then((res) => res.json())
 		.then((data) => {
-				// setPokemonList([...data.results].map((el) => el.name))
-				setPokemonList(data.results)
+			// setPokemonList([...data.results].map((el) => el.name))
+			setPokemonList(data.results)
 		});
 
 	const buscarPokemon = () => {

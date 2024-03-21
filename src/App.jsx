@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import React, { useEffect } from "react";
 import Index from "./Views/Index.jsx";
-import Detalle from "./Views/Detalle.jsx";
+import Favoritos from "./Views/Favoritos.jsx";
 import MiContextoProveedor from "./context/context.jsx";
 
 import "./App.css";
@@ -22,7 +22,7 @@ function App() {
 						</MiContextoProveedor>
 					}
 				/>
-				{/* <Route path='/pokemon/:id' element={<Detalle />} /> */}
+				<Route path='/pokemon/favoritos' element={<Favoritos />} />
 			</Routes>
 		</BrowserRouter>
 	);

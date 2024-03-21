@@ -28,9 +28,11 @@ const PokeList = () => {
 				{listPokemons &&
 					listPokemons.map((el, i) => {
 						if (i < 12) return <PokeItem key={el.name} data={el} />;
-					})}
+					})
+				}
 				{!listPokemons && <div>Pokemon no encontrado</div>}
 			</div>
+
 			<div className='listIndex'>
 				<div>{"<<"}</div>
 				<div>1</div>

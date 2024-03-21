@@ -1,0 +1,27 @@
+Header {
+  position: fixed;
+}
+.favoritos {
+  padding: 8em 16em;
+
+  & .layoutFavoritos {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+  & .r {
+    width: 240px;
+    height: 340px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px #fff;
+  }
+}
+& .botonAtras {
+  position: fixed;
+  right: 0;
+  padding: 1.3rem 3rem;
+  z-index: 1;
+  cursor: pointer;
+}
