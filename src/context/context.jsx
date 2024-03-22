@@ -9,6 +9,8 @@ export default function MiContextoProveedor({ children }) {
 	const [verPokeList, setVerPokeList] = useState(true);
 	const [dataCard, setDataCard] = useState({});
 	const [filteredList, setFilteredList] = useState(false);
+	const [listPokemons, setListPokemons] = useState([]);
+
 
 
 	return (
@@ -24,6 +26,8 @@ export default function MiContextoProveedor({ children }) {
 				setVerPokeList,
 				filteredList,
 				setFilteredList,
+				listPokemons,
+				setListPokemons
 			}}>
 			{children}
 		</MiContexto.Provider>

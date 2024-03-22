@@ -8,9 +8,7 @@ import "../styles/PokeList.css";
 
 const PokeList = () => {
 	const context = useContext(MiContexto);
-	const { filteredList } = context;
-
-	let [listPokemons, setListPokemons] = useState([]);
+	const { filteredList, listPokemons, setListPokemons } = context;
 
 	useEffect(() => {
 		filteredList === false
@@ -18,6 +16,7 @@ const PokeList = () => {
 				.then((res) => res.json())
 				.then((data) => {
 					setListPokemons(data.results);
+					console.log(data);
 				})
 			: setListPokemons(filteredList);
 	}, [filteredList]);
