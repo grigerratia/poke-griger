@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "../styles/BotonSorpresa.css";
 import { getPokemon } from '../utils/getPokemon'
 import { MiContexto } from '../context/context'
@@ -8,20 +8,22 @@ const BotonSorpresa = () => {
 	const context = useContext(MiContexto)
 	const { setDataCard, setVerPokeDe } = context
 
+	let random = (n) => Math.floor(Math.random() * n)
+	const END_POINT = `${random(100000)}`
 
-
-	let random = () => Math.floor(Math.random() * 1302)
-
-	const END_POINT = `${random()}`
-	const mostrarSorpresa = async () => {
-		const res = await getPokemon(END_POINT)
-		const data = await res?.json()
-
-		const mostrarCard = async () => await data ? setDataCard(data) : mostrarSorpresa()
-		mostrarCard()
-		setVerPokeDe(true)
-		return data
+	const mostrarSorpresa = () => {
+		getPokemon(END_POINT)
+			.then(res => {
+				if (res.status === 404) return getPokemon(`${random(500)}`).then(resp => resp.json())
+				return res.json()
+			})
+			.then(data => {
+				setDataCard(data)
+				setVerPokeDe(true)
+			})
 	}
+
+
 
 	return (
 		<div className='botonSorpresa'>

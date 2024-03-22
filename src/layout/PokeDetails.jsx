@@ -5,6 +5,7 @@ import "../styles/PokeDetails.css";
 import Evolucion from "../Components/Evolucion";
 import PokemonFigth from "../Components/PokemonFigth";
 import PokeDetailsCard from "./PokeDetailsCard";
+import { getIdOfUrl } from "../utils/getIdOfUrl";
 
 const PokeDetails = () => {
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
@@ -13,15 +14,8 @@ const PokeDetails = () => {
 	const { dataCard } = pokeDet;
 	const { species } = dataCard
 
-	const [nameEvBefore, setNameEvBefore] = useState("")
-	const [idEvBefore, setIdEvBefore] = useState("")
-	const [urlBefore, setUrlBefore] = useState("")
-
-	const [nameEvNext, setNameEvNext] = useState("")
-	const [idEvNext, setEvNext] = useState("")
-	const [urlNext, setUrlNext] = useState("")
-
-
+	const [evolChain, setEvolChain] = useState([])
+	const [actualEvol, setActualEvol] = useState([])
 
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
 	const togglePoDe = () => {
@@ -30,21 +24,52 @@ const PokeDetails = () => {
 			: pokeDet.setVerPokeDe(true);
 	};
 
-	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SUS EVOLUCIONES
+	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
 		fetch(species.url)
 			.then(res => res.json())
-			.then(data => {
-				return data
-			})
-			.then(data => fetch(data.evolves_from_species.url))
+			.then(data => data)
+			.then(data => fetch(data.evolution_chain.url))
 			.then(res => res.json())
 			.then(data => {
-				setNameEvBefore(data.name)
-				setIdEvBefore(data.id)
-				console.log(data);
-				return data
+				const getEvolves = (chain) => {
+					if (!chain) return
+					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
+					setEvolChain(evolChain.push(chain.species.url))
+
+					//GUARDA EL ID DEL POKEMON A PARTIR DE LA URL
+					const guardarPokemonActual = (url) => {
+						if (getIdOfUrl(url) === dataCard.id) setActualEvol(url)
+					}
+					guardarPokemonActual(chain.species.url)
+
+					//AGREGA AL ARRAY LAS EVOLUCIONES CUANDO SON MÁS DE 2
+					if (chain.evolves_to.length > 1) {
+						const loop = (chain) => {
+							chain.forEach(evol => {
+								setEvolChain(evolChain.push(evol.species.url))
+								guardarPokemonActual(evol.species.url)
+							});
+							return
+						}
+						loop(chain.evolves_to)
+					}
+
+					//AGREGA AL ARRAY LAS EVOLUCIONES CUANDO SON SOLO 2 O UNA
+					if (chain.evolves_to.length === 1) {
+						const loop = (chain) => {
+							if (!chain) return
+							setEvolChain(evolChain.push(chain.species.url))
+							guardarPokemonActual(chain.species.url)
+							loop(chain.evolves_to[0])
+						}
+						loop(chain.evolves_to[0])
+					}
+					console.log(evolChain);
+				}
+				getEvolves(data.chain)
 			})
+
 	}, [])
 
 	return (
@@ -55,13 +80,13 @@ const PokeDetails = () => {
 						<div className='pokemon'>
 							<div className='pokemonImage'>
 								<div className='evBefore'>
-									<Evolucion nameEv={nameEvBefore} idEv={idEvBefore} />
+									<Evolucion nameEv={'nombre'} idEv={1} />
 								</div>
 								<div className='imageP'>
 									<img src={imgURL + dataCard.id + ".png"} alt='' />
 								</div>
 								<div className='evNext'>
-									<Evolucion nameEv={nameEvBefore} idEv={idEvBefore} />
+									<Evolucion nameEv={'otroN'} idEv={78} />
 								</div>
 							</div>
 							<PokemonFigth />

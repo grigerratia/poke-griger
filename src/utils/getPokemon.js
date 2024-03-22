@@ -1,4 +1,3 @@
-import { capitalize } from "@mui/material";
 import { POKE_API } from "./url";
 
 export function getPokemon(parametro) {
