@@ -16,7 +16,6 @@ const PokeList = () => {
 				.then((res) => res.json())
 				.then((data) => {
 					setListPokemons(data.results);
-					console.log(data);
 				})
 			: setListPokemons(filteredList);
 	}, [filteredList]);

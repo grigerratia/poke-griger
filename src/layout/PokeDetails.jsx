@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MiContexto } from "../context/context";
-
+import { getIdOfUrl } from "../utils/getIdOfUrl"
 import "../styles/PokeDetails.css";
 import Evolucion from "../Components/Evolucion";
 import PokemonFigth from "../Components/PokemonFigth";
 import PokeDetailsCard from "./PokeDetailsCard";
-import { getIdOfUrl } from "../utils/getIdOfUrl";
 
 const PokeDetails = () => {
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
@@ -15,7 +14,8 @@ const PokeDetails = () => {
 	const { species } = dataCard
 
 	const [evolChain, setEvolChain] = useState([])
-	const [actualEvol, setActualEvol] = useState([])
+	const [actualEvol, setActualEvol] = useState("")
+	const [beforeEvol, setBeforeEvol] = useState([])
 
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
 	const togglePoDe = () => {
@@ -34,21 +34,16 @@ const PokeDetails = () => {
 			.then(data => {
 				const getEvolves = (chain) => {
 					if (!chain) return
+
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
 					setEvolChain(evolChain.push(chain.species.url))
 
-					//GUARDA EL ID DEL POKEMON A PARTIR DE LA URL
-					const guardarPokemonActual = (url) => {
-						if (getIdOfUrl(url) === dataCard.id) setActualEvol(url)
-					}
-					guardarPokemonActual(chain.species.url)
 
 					//AGREGA AL ARRAY LAS EVOLUCIONES CUANDO SON MÁS DE 2
 					if (chain.evolves_to.length > 1) {
 						const loop = (chain) => {
 							chain.forEach(evol => {
 								setEvolChain(evolChain.push(evol.species.url))
-								guardarPokemonActual(evol.species.url)
 							});
 							return
 						}
@@ -60,12 +55,10 @@ const PokeDetails = () => {
 						const loop = (chain) => {
 							if (!chain) return
 							setEvolChain(evolChain.push(chain.species.url))
-							guardarPokemonActual(chain.species.url)
 							loop(chain.evolves_to[0])
 						}
 						loop(chain.evolves_to[0])
 					}
-					console.log(evolChain);
 				}
 				getEvolves(data.chain)
 			})

@@ -1,11 +1,16 @@
-@keyframes zoom-card {
+/* @keyframes zoom-card {
 	0% {
-		margin-left: 100%;
+		transform: scale(3);
+		filter: blur(1.5rem);
+	}
+	80% {
+		transform: scale(0.7);
+		filter: blur(0);
 	}
 	100% {
-		margin-left: 0;
+		transform: scale(1);
 	}
-}
+} */
 
 .contentPokeDetails{
 	position: absolute;
