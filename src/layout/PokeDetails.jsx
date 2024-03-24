@@ -13,6 +13,7 @@ const PokeDetails = () => {
 	const { dataCard } = pokeDet;
 	const { species } = dataCard
 
+	const [urlNum, setUrlNum] = useState("")
 	const [evolChain, setEvolChain] = useState([])
 	const [actualEvol, setActualEvol] = useState("")
 	const [beforeEvol, setBeforeEvol] = useState([])
@@ -32,18 +33,23 @@ const PokeDetails = () => {
 			.then(data => fetch(data.evolution_chain.url))
 			.then(res => res.json())
 			.then(data => {
+
 				const getEvolves = (chain) => {
 					if (!chain) return
 
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
 					setEvolChain(evolChain.push(chain.species.url))
-
+					setUrlNum(String(getIdOfUrl(chain.species.url)));
+					if (urlNum === String(dataCard.id)) setActualEvol(url)
 
 					//AGREGA AL ARRAY LAS EVOLUCIONES CUANDO SON MÁS DE 2
 					if (chain.evolves_to.length > 1) {
 						const loop = (chain) => {
 							chain.forEach(evol => {
 								setEvolChain(evolChain.push(evol.species.url))
+								setUrlNum(String(getIdOfUrl(evol.species.url)));
+								if (urlNum === String(dataCard.id)) setActualEvol(url)
+
 							});
 							return
 						}
@@ -55,12 +61,16 @@ const PokeDetails = () => {
 						const loop = (chain) => {
 							if (!chain) return
 							setEvolChain(evolChain.push(chain.species.url))
+							setUrlNum(String(getIdOfUrl(chain.species.url)));
+							if (urlNum === String(dataCard.id)) setActualEvol(url)
+
 							loop(chain.evolves_to[0])
 						}
 						loop(chain.evolves_to[0])
 					}
 				}
 				getEvolves(data.chain)
+				console.log(actualEvol);
 			})
 
 	}, [])
