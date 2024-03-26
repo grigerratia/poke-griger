@@ -48,6 +48,10 @@
 		transform: translateX(-10px);
 	}
 
+	&:active {
+		transform: scale(1.5);
+	}
+
 	/* &:hover picture img {
 	} */
 }
