@@ -1,22 +1,20 @@
 import React, { useEffect } from "react";
 import "../styles/Evolucion.css";
 
-const Evolucion = ({ nameEv, idEv }) => {
-
-	// console.log(dataEv)
+const Evolucion = ({ urlEvol }) => {
 
 	return (
 		<div className='evolucion'>
 			<div className='evolucion-circulo'>
 				<figure>
 					<img
-						src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" + idEv + ".gif"}
+						src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" + 5 + ".gif"}
 						alt=''
 					/>
 				</figure>
 			</div>
 			<div className='evolucion-datos'>
-				<div className='evolucion-datos--nombre'>{!nameEv ? "nombre" : nameEv}</div>
+				<div className='evolucion-datos--nombre'>Nombre</div>
 			</div>
 		</div>
 	);

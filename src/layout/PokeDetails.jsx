@@ -1,28 +1,31 @@
-import React, { useContext, useEffect, useState } from "react";
-import { MiContexto } from "../context/context";
+import React, { useContext, useEffect, useState } from "react"
+import { MiContexto } from "../context/context"
 import { getIdOfUrl } from "../utils/getIdOfUrl"
-import "../styles/PokeDetails.css";
-import Evolucion from "../Components/Evolucion";
-import PokemonFigth from "../Components/PokemonFigth";
-import PokeDetailsCard from "./PokeDetailsCard";
+import "../styles/PokeDetails.css"
+import Evolucion from "../Components/Evolucion"
+import PokemonFigth from "../Components/PokemonFigth"
+import PokeDetailsCard from "./PokeDetailsCard"
 
 const PokeDetails = () => {
-	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
+	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 
-	const pokeDet = useContext(MiContexto);
-	const { dataCard } = pokeDet;
-	const { species } = dataCard
+	const pokeDet = useContext(MiContexto)
+	const { dataCard } = pokeDet
+	const { species, id } = dataCard
+	const strId = String(id)
+	let actualUrl
+	let beforeUrl
+	let afterUrl
 
-	const [urlNum, setUrlNum] = useState("")
 	const [evolChain, setEvolChain] = useState([])
-	const [actualEvol, setActualEvol] = useState("")
-	const [beforeEvol, setBeforeEvol] = useState([])
+	// const [before, setBefore] = useState([])
+	// const [after, setAfter] = useState([])
 
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
 	const togglePoDe = () => {
 		pokeDet.verPokeDe
 			? pokeDet.setVerPokeDe(false)
-			: pokeDet.setVerPokeDe(true);
+			: pokeDet.setVerPokeDe(true)
 	};
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
@@ -36,21 +39,24 @@ const PokeDetails = () => {
 
 				const getEvolves = (chain) => {
 					if (!chain) return
+					let actualIdUrl
+					let urlId
 
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
-					setEvolChain(evolChain.push(chain.species.url))
-					setUrlNum(String(getIdOfUrl(chain.species.url)));
-					if (urlNum === String(dataCard.id)) setActualEvol(url)
+					const makeEvolChain = (chain) => {
+						setEvolChain(evolChain.push(chain))
+						urlId = getIdOfUrl(chain).toString()
+						if (urlId === strId) {
+							actualUrl = chain
+							actualIdUrl = urlId
+						}
+					}
+					makeEvolChain(chain.species.url)
 
 					//AGREGA AL ARRAY LAS EVOLUCIONES CUANDO SON MÁS DE 2
 					if (chain.evolves_to.length > 1) {
 						const loop = (chain) => {
-							chain.forEach(evol => {
-								setEvolChain(evolChain.push(evol.species.url))
-								setUrlNum(String(getIdOfUrl(evol.species.url)));
-								if (urlNum === String(dataCard.id)) setActualEvol(url)
-
-							});
+							chain.forEach(evol => makeEvolChain(evol.species.url));
 							return
 						}
 						loop(chain.evolves_to)
@@ -60,17 +66,23 @@ const PokeDetails = () => {
 					if (chain.evolves_to.length === 1) {
 						const loop = (chain) => {
 							if (!chain) return
-							setEvolChain(evolChain.push(chain.species.url))
-							setUrlNum(String(getIdOfUrl(chain.species.url)));
-							if (urlNum === String(dataCard.id)) setActualEvol(url)
-
+							makeEvolChain(chain.species.url)
 							loop(chain.evolves_to[0])
 						}
 						loop(chain.evolves_to[0])
 					}
+
+					const getEvols = () => {
+						const ac = evolChain.indexOf(actualUrl)
+						beforeUrl = evolChain[ac - 1]
+						afterUrl = evolChain[ac + 1]
+					}
+					getEvols()
+
+					console.log(beforeUrl);
+					console.log(afterUrl);
 				}
 				getEvolves(data.chain)
-				console.log(actualEvol);
 			})
 
 	}, [])
@@ -83,13 +95,13 @@ const PokeDetails = () => {
 						<div className='pokemon'>
 							<div className='pokemonImage'>
 								<div className='evBefore'>
-									<Evolucion nameEv={'nombre'} idEv={1} />
+									<Evolucion urlEvol={beforeUrl} />
 								</div>
 								<div className='imageP'>
 									<img src={imgURL + dataCard.id + ".png"} alt='' />
 								</div>
 								<div className='evNext'>
-									<Evolucion nameEv={'otroN'} idEv={78} />
+									<Evolucion urlEvol={afterUrl} />
 								</div>
 							</div>
 							<PokemonFigth />
