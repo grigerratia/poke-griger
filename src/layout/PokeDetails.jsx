@@ -18,8 +18,8 @@ const PokeDetails = () => {
 	let afterUrl
 
 	const [evolChain, setEvolChain] = useState([])
-	// const [before, setBefore] = useState([])
-	// const [after, setAfter] = useState([])
+	const [b, setB] = useState("")
+	const [a, setA] = useState("")
 
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
 	const togglePoDe = () => {
@@ -76,11 +76,11 @@ const PokeDetails = () => {
 						const ac = evolChain.indexOf(actualUrl)
 						beforeUrl = evolChain[ac - 1]
 						afterUrl = evolChain[ac + 1]
+
+						setB(beforeUrl)
+						setA(afterUrl)
 					}
 					getEvols()
-
-					console.log(beforeUrl);
-					console.log(afterUrl);
 				}
 				getEvolves(data.chain)
 			})
@@ -95,13 +95,13 @@ const PokeDetails = () => {
 						<div className='pokemon'>
 							<div className='pokemonImage'>
 								<div className='evBefore'>
-									<Evolucion urlEvol={beforeUrl} />
+									{b && <Evolucion urlEvol={b} />}
 								</div>
 								<div className='imageP'>
 									<img src={imgURL + dataCard.id + ".png"} alt='' />
 								</div>
 								<div className='evNext'>
-									<Evolucion urlEvol={afterUrl} />
+									{a && <Evolucion urlEvol={a} />}
 								</div>
 							</div>
 							<PokemonFigth />
