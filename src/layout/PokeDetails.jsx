@@ -9,8 +9,8 @@ import PokeDetailsCard from "./PokeDetailsCard"
 const PokeDetails = () => {
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 
-	const pokeDet = useContext(MiContexto)
-	const { dataCard } = pokeDet
+	const context = useContext(MiContexto)
+	const { dataCard } = context
 	const { species, id } = dataCard
 	const strId = String(id)
 	let actualUrl
@@ -23,9 +23,9 @@ const PokeDetails = () => {
 
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
 	const togglePoDe = () => {
-		pokeDet.verPokeDe
-			? pokeDet.setVerPokeDe(false)
-			: pokeDet.setVerPokeDe(true)
+		context.verPokeDe
+			? context.setVerPokeDe(false)
+			: context.setVerPokeDe(true)
 	};
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN

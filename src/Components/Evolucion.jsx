@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../styles/Evolucion.css";
+import { MiContexto } from "../context/context";
+
 
 const Evolucion = ({ urlEvol }) => {
 
+	// const context = useContext(MiContexto)
+	// const { setDataCard } = context
 	const [pokemon, setPokemon] = useState()
+
+	// const cambiarPokemon = () => {
+	// 	setDataCard(pokemon)
+	// }
 
 	useEffect(() => {
 		fetch(urlEvol)
@@ -14,7 +22,7 @@ const Evolucion = ({ urlEvol }) => {
 	}, [])
 
 	return (
-		<div className='evolucion'>
+		<div className='evolucion' >
 			<div className='evolucion-circulo'>
 				<figure>
 					<img

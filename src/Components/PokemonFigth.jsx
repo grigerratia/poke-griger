@@ -4,9 +4,9 @@ import "../styles/PokemonFigth.css";
 
 const PokemonFigth = () => {
 	const context = useContext(MiContexto);
-
 	const { dataCard } = context;
 	const { stats } = dataCard;
+
 
 	return (
 		<div className='pokemonFigth'>

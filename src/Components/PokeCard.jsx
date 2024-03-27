@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { MiContexto } from "../context/context";
 import "../styles/PokeCard.css";
 
 const PokeCard = () => {
-	const pokeDet = useContext(MiContexto);
-	const { dataCard } = pokeDet;
+	const context = useContext(MiContexto);
+	const { dataCard } = context;
 
 	const { name, types, abilities, id } = dataCard;
 
@@ -14,20 +14,20 @@ const PokeCard = () => {
 		".png";
 
 	const togglePoDe = () => {
-		pokeDet.verPokeDe
-			? pokeDet.setVerPokeDe(false)
-			: pokeDet.setVerPokeDe(true);
+		context.verPokeDe
+			? context.setVerPokeDe(false)
+			: context.setVerPokeDe(true)
 	};
 
 	const close = () => {
-		pokeDet.setVerPokeList(true)
+		context.setVerPokeList(true)
 	}
 
 	return (
 		<>
 			<div
 				key={types[0].type.name}
-				className={"content-card" + " " + types[0].type.name}
+				className={"content-card" + " " + types[0]?.type.name}
 				onClick={togglePoDe}>
 				<picture>
 					<img src={img} alt={name} />

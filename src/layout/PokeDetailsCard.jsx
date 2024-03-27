@@ -9,7 +9,7 @@ const PokeDetailsCard = () => {
 
 
 	useEffect(() => {
-		fetch(dataCard.species.url).then((res) => {
+		fetch(dataCard.species?.url).then((res) => {
 			if (res.status !== 404) {
 				res.json().then((data) => {
 
