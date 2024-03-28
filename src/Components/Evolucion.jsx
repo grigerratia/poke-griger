@@ -1,28 +1,32 @@
 import React, { useEffect, useState, useContext } from "react";
 import "../styles/Evolucion.css";
 import { MiContexto } from "../context/context";
+import { getIdOfUrl } from "../utils/getIdOfUrl";
+import { getPokemon } from "../utils/getPokemon";
 
 
 const Evolucion = ({ urlEvol }) => {
 
-	// const context = useContext(MiContexto)
-	// const { setDataCard } = context
+	const context = useContext(MiContexto)
+	const { dataCard, setDataCard } = context
 	const [pokemon, setPokemon] = useState()
+	const [evol, setEvol] = useState(urlEvol)
 
-	// const cambiarPokemon = () => {
-	// 	setDataCard(pokemon)
-	// }
+	const cambiarPokemon = () => {
+		console.log({ Evolucion: pokemon });
+		setDataCard(pokemon)
+	}
 
 	useEffect(() => {
-		fetch(urlEvol)
+		getPokemon(getIdOfUrl(urlEvol).toString())
 			.then(res => res.json())
 			.then(data => {
 				setPokemon(data)
 			})
-	}, [])
+	}, [evol])
 
 	return (
-		<div className='evolucion' >
+		<div className='evolucion' onClick={cambiarPokemon}>
 			<div className='evolucion-circulo'>
 				<figure>
 					<img

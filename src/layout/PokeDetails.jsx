@@ -10,14 +10,15 @@ const PokeDetails = () => {
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 
 	const context = useContext(MiContexto)
+
+	const [evolChain, setEvolChain] = useState([])
 	const { dataCard } = context
-	const { species, id } = dataCard
+	const { id } = dataCard
 	const strId = String(id)
 	let actualUrl
 	let beforeUrl
 	let afterUrl
 
-	const [evolChain, setEvolChain] = useState([])
 	const [b, setB] = useState("")
 	const [a, setA] = useState("")
 
@@ -30,7 +31,7 @@ const PokeDetails = () => {
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
-		fetch(species.url)
+		fetch(dataCard.species.url)
 			.then(res => res.json())
 			.then(data => data)
 			.then(data => fetch(data.evolution_chain.url))
@@ -44,6 +45,7 @@ const PokeDetails = () => {
 
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
 					const makeEvolChain = (chain) => {
+						console.log({ pokeDetails: evolChain });
 						setEvolChain(evolChain.push(chain))
 						urlId = getIdOfUrl(chain).toString()
 						if (urlId === strId) {
@@ -96,6 +98,7 @@ const PokeDetails = () => {
 							<div className='pokemonImage'>
 								<div className='evBefore'>
 									{b && <Evolucion urlEvol={b} />}
+
 								</div>
 								<div className='imageP'>
 									<img src={imgURL + dataCard.id + ".png"} alt='' />
