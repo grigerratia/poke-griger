@@ -8,12 +8,10 @@ import { getPokemon } from "../utils/getPokemon";
 const Evolucion = ({ urlEvol }) => {
 
 	const context = useContext(MiContexto)
-	const { dataCard, setDataCard } = context
+	const { dataCard, setDataCard, beforeEvolution, setBeforeEvolution, nextEvolution, setNextEvolution } = context
 	const [pokemon, setPokemon] = useState()
-	const [evol, setEvol] = useState(urlEvol)
 
 	const cambiarPokemon = () => {
-		console.log({ Evolucion: pokemon });
 		setDataCard(pokemon)
 	}
 
@@ -23,7 +21,7 @@ const Evolucion = ({ urlEvol }) => {
 			.then(data => {
 				setPokemon(data)
 			})
-	}, [evol])
+	}, [])
 
 	return (
 		<div className='evolucion' onClick={cambiarPokemon}>

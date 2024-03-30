@@ -12,7 +12,7 @@ const PokeDetails = () => {
 	const context = useContext(MiContexto)
 
 	const [evolChain, setEvolChain] = useState([])
-	const { dataCard } = context
+	const { dataCard, beforeEvolution, setBeforeEvolution, nextEvolution, setNextEvolution } = context
 	const { id } = dataCard
 	const strId = String(id)
 	let actualUrl
@@ -81,7 +81,10 @@ const PokeDetails = () => {
 
 						setB(beforeUrl)
 						setA(afterUrl)
+						setBeforeEvolution(b)
+						setNextEvolution(a)
 					}
+
 					getEvols()
 				}
 				getEvolves(data.chain)

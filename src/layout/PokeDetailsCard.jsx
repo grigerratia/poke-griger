@@ -22,7 +22,7 @@ const PokeDetailsCard = () => {
 				});
 			}
 		});
-	}, [])
+	}, [dataCard])
 
 
 	// const description = data?.map((el) => el.flavor_text_entries);
