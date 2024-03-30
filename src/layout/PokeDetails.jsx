@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react"
 import { MiContexto } from "../context/context"
 import { getIdOfUrl } from "../utils/getIdOfUrl"
+import { getPokemon } from "../utils/getPokemon";
+
 import "../styles/PokeDetails.css"
 import Evolucion from "../Components/Evolucion"
 import PokemonFigth from "../Components/PokemonFigth"
@@ -16,8 +18,6 @@ const PokeDetails = () => {
 	const { id } = dataCard
 	const strId = String(id)
 	let actualUrl
-	let beforeUrl
-	let afterUrl
 
 	const [b, setB] = useState("")
 	const [a, setA] = useState("")
@@ -45,7 +45,6 @@ const PokeDetails = () => {
 
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
 					const makeEvolChain = (chain) => {
-						console.log({ pokeDetails: evolChain });
 						setEvolChain(evolChain.push(chain))
 						urlId = getIdOfUrl(chain).toString()
 						if (urlId === strId) {
@@ -76,13 +75,23 @@ const PokeDetails = () => {
 
 					const getEvols = () => {
 						const ac = evolChain.indexOf(actualUrl)
-						beforeUrl = evolChain[ac - 1]
-						afterUrl = evolChain[ac + 1]
 
-						setB(beforeUrl)
-						setA(afterUrl)
-						setBeforeEvolution(b)
-						setNextEvolution(a)
+						setB(evolChain[ac - 1])
+						setA(evolChain[ac + 1])
+
+
+
+						getPokemon(getIdOfUrl(b).toString())
+							.then(res => res.json())
+							.then(data => {
+								setBeforeEvolution(data)
+							})
+
+						getPokemon(getIdOfUrl(a).toString())
+							.then(res => res.json())
+							.then(data => {
+								setNextEvolution(data)
+							})
 					}
 
 					getEvols()

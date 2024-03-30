@@ -21,7 +21,9 @@ const Evolucion = ({ urlEvol }) => {
 			.then(data => {
 				setPokemon(data)
 			})
-	}, [])
+
+		console.log(beforeEvolution, nextEvolution);
+	}, [dataCard])
 
 	return (
 		<div className='evolucion' onClick={cambiarPokemon}>
