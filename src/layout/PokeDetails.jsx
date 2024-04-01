@@ -14,10 +14,13 @@ const PokeDetails = () => {
 	const context = useContext(MiContexto)
 
 	const [evolChain, setEvolChain] = useState([])
-	const { dataCard, beforeEvolution, setBeforeEvolution, nextEvolution, setNextEvolution } = context
+	const [pokemon, setPokemon] = useState()
+	const { dataCard, setDataCard, beforeEvolution, setBeforeEvolution, nextEvolution, setNextEvolution } = context
 	const { id } = dataCard
 	const strId = String(id)
 	let actualUrl
+	let actualIdUrl
+	let urlId
 
 	const [b, setB] = useState("")
 	const [a, setA] = useState("")
@@ -28,6 +31,10 @@ const PokeDetails = () => {
 			? context.setVerPokeDe(false)
 			: context.setVerPokeDe(true)
 	};
+
+	// const cambiarPokemon = () => {
+	// 	setDataCard(pokemon)
+	// }
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
@@ -40,12 +47,10 @@ const PokeDetails = () => {
 
 				const getEvolves = (chain) => {
 					if (!chain) return
-					let actualIdUrl
-					let urlId
 
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
 					const makeEvolChain = (chain) => {
-						setEvolChain(evolChain.push(chain))
+						setEvolChain(evolChain?.push(chain))
 						urlId = getIdOfUrl(chain).toString()
 						if (urlId === strId) {
 							actualUrl = chain
@@ -75,31 +80,32 @@ const PokeDetails = () => {
 
 					const getEvols = () => {
 						const ac = evolChain.indexOf(actualUrl)
-
 						setB(evolChain[ac - 1])
 						setA(evolChain[ac + 1])
 
 
-
-						getPokemon(getIdOfUrl(b).toString())
-							.then(res => res.json())
-							.then(data => {
-								setBeforeEvolution(data)
-							})
-
-						getPokemon(getIdOfUrl(a).toString())
-							.then(res => res.json())
-							.then(data => {
-								setNextEvolution(data)
-							})
 					}
-
 					getEvols()
+
+
 				}
 				getEvolves(data.chain)
+
 			})
 
-	}, [])
+		getPokemon(getIdOfUrl(b).toString())
+			.then(res => res.json())
+			.then(data => {
+				setBeforeEvolution(data)
+			})
+
+		getPokemon(getIdOfUrl(a).toString())
+			.then(res => res.json())
+			.then(data => {
+				setNextEvolution(data)
+			})
+
+	}, [dataCard])
 
 	return (
 		<div className="contentPokeDetails">
@@ -109,14 +115,14 @@ const PokeDetails = () => {
 						<div className='pokemon'>
 							<div className='pokemonImage'>
 								<div className='evBefore'>
-									{b && <Evolucion urlEvol={b} />}
+									{beforeEvolution && <Evolucion urlEvol={beforeEvolution} />}
 
 								</div>
 								<div className='imageP'>
 									<img src={imgURL + dataCard.id + ".png"} alt='' />
 								</div>
 								<div className='evNext'>
-									{a && <Evolucion urlEvol={a} />}
+									{nextEvolution && <Evolucion urlEvol={nextEvolution} />}
 								</div>
 							</div>
 							<PokemonFigth />
@@ -132,7 +138,7 @@ const PokeDetails = () => {
 					X
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 };
 

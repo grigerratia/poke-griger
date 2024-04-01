@@ -16,13 +16,13 @@ const Evolucion = ({ urlEvol }) => {
 	}
 
 	useEffect(() => {
-		getPokemon(getIdOfUrl(urlEvol).toString())
-			.then(res => res.json())
-			.then(data => {
-				setPokemon(data)
-			})
-
+		// getPokemon(String(urlEvol.id))
+		// 	.then(res => res.json())
+		// 	.then(data => {
+		// 		setPokemon(data)
+		// 	})
 		console.log(beforeEvolution, nextEvolution);
+		setPokemon(urlEvol)
 	}, [dataCard])
 
 	return (
