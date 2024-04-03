@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MiContexto } from "../context/context";
+import PokemonFigth from "../Components/PokemonFigth";
 
 const PokeDetailsCard = () => {
 	const context = useContext(MiContexto);
@@ -65,6 +66,7 @@ const PokeDetailsCard = () => {
 					<div className='indDetails'>250</div>
 				</div>
 			</div>
+			<PokemonFigth />
 			<div className='pokeDebilidad'>
 				<h4>Debilidad</h4>
 				<span>Fuego</span>

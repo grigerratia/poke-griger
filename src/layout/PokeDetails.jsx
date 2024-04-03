@@ -4,8 +4,6 @@ import { getIdOfUrl } from "../utils/getIdOfUrl"
 import { getPokemon } from "../utils/getPokemon";
 
 import "../styles/PokeDetails.css"
-import Evolucion from "../Components/Evolucion"
-import PokemonFigth from "../Components/PokemonFigth"
 import PokeDetailsCard from "./PokeDetailsCard"
 
 const PokeDetails = () => {
@@ -13,17 +11,16 @@ const PokeDetails = () => {
 
 	const context = useContext(MiContexto)
 
+	const { dataCard, setDataCard } = context
 	const [evolChain, setEvolChain] = useState([])
-	const [pokemon, setPokemon] = useState()
-	const { dataCard, setDataCard, beforeEvolution, setBeforeEvolution, nextEvolution, setNextEvolution } = context
+	const [evolChainGot, setEvolChainGot] = useState([])
 	const { id } = dataCard
 	const strId = String(id)
+
+	let urlId
 	let actualUrl
 	let actualIdUrl
-	let urlId
 
-	const [b, setB] = useState("")
-	const [a, setA] = useState("")
 
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
 	const togglePoDe = () => {
@@ -31,10 +28,6 @@ const PokeDetails = () => {
 			? context.setVerPokeDe(false)
 			: context.setVerPokeDe(true)
 	};
-
-	// const cambiarPokemon = () => {
-	// 	setDataCard(pokemon)
-	// }
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
@@ -79,56 +72,75 @@ const PokeDetails = () => {
 					}
 
 					const getEvols = () => {
-						const ac = evolChain.indexOf(actualUrl)
-						setB(evolChain[ac - 1])
-						setA(evolChain[ac + 1])
-
-
+						evolChain.map((el) => {
+							getPokemon(getIdOfUrl(el).toString())
+								.then(res => res.json())
+								.then(data => {
+									setEvolChainGot(evolChainGot.push(data))
+								})
+						})
+						console.log(evolChainGot);
 					}
 					getEvols()
 
-
 				}
+
 				getEvolves(data.chain)
 
+
 			})
 
-		getPokemon(getIdOfUrl(b).toString())
-			.then(res => res.json())
-			.then(data => {
-				setBeforeEvolution(data)
-			})
+	}, [])
 
-		getPokemon(getIdOfUrl(a).toString())
-			.then(res => res.json())
-			.then(data => {
-				setNextEvolution(data)
-			})
-
-	}, [dataCard])
 
 	return (
 		<div className="contentPokeDetails">
 			<div className='pokeDetails'>
 				<div className='pokeDetailContainer'>
 					<div className='pokeDetailMain'>
+
+
+
+
 						<div className='pokemon'>
 							<div className='pokemonImage'>
-								<div className='evBefore'>
-									{beforeEvolution && <Evolucion urlEvol={beforeEvolution} />}
 
-								</div>
 								<div className='imageP'>
 									<img src={imgURL + dataCard.id + ".png"} alt='' />
 								</div>
-								<div className='evNext'>
-									{nextEvolution && <Evolucion urlEvol={nextEvolution} />}
-								</div>
 							</div>
-							<PokemonFigth />
+							{
+								[evolChainGot]?.map((pokemon) => {
+									console.log();
+									// return (
+									// 	<div className='evNext'>
+									// 		<div className='evolucion'>
+									// 			<div className='evolucion-circulo'>
+									// 				<figure>
+									// 					<img
+									// 						src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" + pokemon?.id + ".gif"}
+									// 						alt=''
+									// 					/>
+									// 				</figure>
+									// 			</div>
+									// 			<div className='evolucion-datos'>
+									// 				<div className='evolucion-datos--nombre'>{pokemon?.name}</div>
+									// 			</div>
+									// 		</div>
+									// 	</div>
+									// )
+								})
+							}
 						</div>
+
+
 						<PokeDetailsCard />
 					</div>
+
+
+
+
+
 					<div className='beforeNextPokemon'>
 						<div className='beNePo beforeP'>Before</div>
 						<div className='beNePo nextP'>Next</div>
