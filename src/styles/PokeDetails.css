@@ -1,4 +1,4 @@
-/* @keyframes zoom-card {
+@keyframes zoom-card {
 	0% {
 		transform: scale(3);
 		filter: blur(1.5rem);
@@ -10,7 +10,7 @@
 	100% {
 		transform: scale(1);
 	}
-} */
+}
 
 .contentPokeDetails{
 	position: absolute;
@@ -58,7 +58,7 @@
 
 			& .pokemonDetailsCard {
 				width: 350px;
-				height: 600px;
+				height: 550px;
 				overflow-y: scroll;
 				display: flex;
 				flex-direction: column;
@@ -126,4 +126,23 @@
 	right: 0;
 	padding: 2em;
 	cursor: pointer;
+}
+
+
+.evolucionContainer {
+	position: relative;
+	display: flex;
+	justify-content: space-around;
+	width: 450px;
+	overflow-x: scroll;
+	padding: 1em;
+
+	& .evolucion {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: end;
+		margin-bottom: 0;
+		cursor: pointer;
+	}
 }

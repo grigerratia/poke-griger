@@ -8,11 +8,14 @@ import PokeDetailsCard from "./PokeDetailsCard"
 
 const PokeDetails = () => {
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
+	const evolImgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/"
+	const evolStyles = { border: "solid 1px #484747", borderRadius: "8px" }
 
 	const context = useContext(MiContexto)
 
 	const { dataCard, setDataCard } = context
 	const [evolChain, setEvolChain] = useState([])
+	const [newEvol, setNewEvol] = useState([])
 	const [evolChainGot, setEvolChainGot] = useState([])
 	const { id } = dataCard
 	const strId = String(id)
@@ -29,6 +32,11 @@ const PokeDetails = () => {
 			? context.setVerPokeDe(false)
 			: context.setVerPokeDe(true)
 	};
+
+	//CAMBIA EL POKEMON DE LA CADENA DE EVOLUCIÓN DQUE SE SELECCIONA
+	const cambiarEvol = (p) => {
+		setDataCard(p)
+	}
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
@@ -72,8 +80,7 @@ const PokeDetails = () => {
 						loop(chain.evolves_to[0])
 					}
 
-
-					//tRAE LOS DATOS DE TODA LA CADENA DE EVOLUCIÓN
+					//TRAE LOS DATOS DE TODA LA CADENA DE EVOLUCIÓN
 					evolChain.map((el, i) => {
 						getPokemon(getIdOfUrl(el).toString())
 							.then(res => res.json())
@@ -83,15 +90,11 @@ const PokeDetails = () => {
 							})
 					})
 
-
-
 				}
 
 				getEvolves(data.chain)
 
-
 			})
-
 	}, [])
 
 
@@ -111,14 +114,18 @@ const PokeDetails = () => {
 									<img src={imgURL + dataCard.id + ".png"} alt='' />
 								</div>
 							</div>
-							{
-								evolChainGot?.map((pokemon) => (
-									<div className='evNext' key={pokemon?.id}>
-										<div className='evolucion'>
+							<div className="evolucionContainer">
+								{
+									evolChainGot?.map((pokemon) => (
+										<div className='evolucion'
+											key={pokemon?.id}
+											style={pokemon?.id === id ? evolStyles : null}
+											onClick={() => { cambiarEvol(pokemon) }}
+										>
 											<div className='evolucion-circulo'>
 												<figure>
 													<img
-														src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" + pokemon?.id + ".gif"}
+														src={evolImgURL + pokemon?.id + ".gif"}
 														alt=''
 													/>
 												</figure>
@@ -127,10 +134,10 @@ const PokeDetails = () => {
 												<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
 											</div>
 										</div>
-									</div>
-								)
-								)
-							}
+									)
+									)
+								}
+							</div>
 						</div>
 
 
