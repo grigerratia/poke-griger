@@ -30,7 +30,7 @@
 
 	&:hover {
 		box-shadow: 15px 0 32px #412828;
-		transform: translateX(-15px);
+		/* transform: translateX(-15px); */
 		background: linear-gradient(
 			to bottom right,
 			var(--electric),
@@ -38,10 +38,10 @@
 			#111111
 			);
 		}
-		&:hover ~ .cardOptions{
+		/* &:hover ~ .cardOptions{
 		transform: translateX(-15px);
 
-	}
+		} */
 
 	& picture {
 		position: relative;
