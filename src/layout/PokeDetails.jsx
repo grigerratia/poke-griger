@@ -20,6 +20,7 @@ const PokeDetails = () => {
 	let urlId
 	let actualUrl
 	let actualIdUrl
+	let varEvolChain = []
 
 
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
@@ -71,16 +72,18 @@ const PokeDetails = () => {
 						loop(chain.evolves_to[0])
 					}
 
-					const getEvols = () => {
-						evolChain.map((el) => {
-							getPokemon(getIdOfUrl(el).toString())
-								.then(res => res.json())
-								.then(data => {
-									setEvolChainGot(evolChainGot.push(data))
-								})
-						})
-					}
-					getEvols()
+
+					//tRAE LOS DATOS DE TODA LA CADENA DE EVOLUCIÓN
+					evolChain.map((el, i) => {
+						getPokemon(getIdOfUrl(el).toString())
+							.then(res => res.json())
+							.then(data => {
+								varEvolChain.push(data)
+								if (i === evolChain.length - 1) setEvolChainGot(varEvolChain);
+							})
+					})
+
+
 
 				}
 
@@ -109,27 +112,24 @@ const PokeDetails = () => {
 								</div>
 							</div>
 							{
-								evolChainGot.length > 1 &&
-								evolChainGot?.map((pokemon) => {
-									console.log(pokemon);
-									// return (
-									// 	<div className='evNext'>
-									// 		<div className='evolucion'>
-									// 			<div className='evolucion-circulo'>
-									// 				<figure>
-									// 					<img
-									// 						src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" + pokemon?.id + ".gif"}
-									// 						alt=''
-									// 					/>
-									// 				</figure>
-									// 			</div>
-									// 			<div className='evolucion-datos'>
-									// 				<div className='evolucion-datos--nombre'>{pokemon?.name}</div>
-									// 			</div>
-									// 		</div>
-									// 	</div>
-									// )
-								})
+								evolChainGot?.map((pokemon) => (
+									<div className='evNext' key={pokemon?.id}>
+										<div className='evolucion'>
+											<div className='evolucion-circulo'>
+												<figure>
+													<img
+														src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" + pokemon?.id + ".gif"}
+														alt=''
+													/>
+												</figure>
+											</div>
+											<div className='evolucion-datos'>
+												<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
+											</div>
+										</div>
+									</div>
+								)
+								)
 							}
 						</div>
 
