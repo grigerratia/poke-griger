@@ -79,7 +79,6 @@ const PokeDetails = () => {
 									setEvolChainGot(evolChainGot.push(data))
 								})
 						})
-						console.log(evolChainGot);
 					}
 					getEvols()
 
@@ -110,8 +109,9 @@ const PokeDetails = () => {
 								</div>
 							</div>
 							{
-								[evolChainGot]?.map((pokemon) => {
-									console.log();
+								evolChainGot.length > 1 &&
+								evolChainGot?.map((pokemon) => {
+									console.log(pokemon);
 									// return (
 									// 	<div className='evNext'>
 									// 		<div className='evolucion'>
