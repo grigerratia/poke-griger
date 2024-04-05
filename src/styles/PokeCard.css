@@ -30,7 +30,7 @@
 
 	&:hover {
 		box-shadow: 15px 0 32px #412828;
-		/* transform: translateX(-15px); */
+		transform: scale(1.1);
 		background: linear-gradient(
 			to bottom right,
 			var(--electric),
@@ -58,11 +58,12 @@
 		bottom: 0;
 		filter: drop-shadow(0px 0 32px #a49e31);
 		transition: all 0.2s;
+		
 	}
 
 	&:hover img {
 		width: 260px;
-		transform: translateY(-30px);
+		transform: scale(1.2);
 	}
 
 	& p,

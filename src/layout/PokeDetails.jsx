@@ -86,7 +86,7 @@ const PokeDetails = () => {
 							.then(res => res.json())
 							.then(data => {
 								varEvolChain.push(data)
-								if (i === evolChain.length - 1) setEvolChainGot(varEvolChain);
+								if (i === evolChain.length - 1) setEvolChainGot(varEvolChain.sort((a, b) => a.id - b.id));
 							})
 					})
 
