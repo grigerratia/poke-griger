@@ -95,7 +95,7 @@ const PokeDetails = () => {
 				getEvolves(data.chain)
 
 			})
-	}, [])
+	}, [evolChainGot])
 
 
 	return (
