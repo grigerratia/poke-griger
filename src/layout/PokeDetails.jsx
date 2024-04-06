@@ -15,8 +15,9 @@ const PokeDetails = () => {
 
 	const { dataCard, setDataCard } = context
 	const [evolChain, setEvolChain] = useState([])
-	const [newEvol, setNewEvol] = useState([])
 	const [evolChainGot, setEvolChainGot] = useState([])
+	const [img, setImg] = useState("");
+	const [thePokemon, setThePokemon] = useState([])
 	const { id } = dataCard
 	const strId = String(id)
 
@@ -36,6 +37,17 @@ const PokeDetails = () => {
 	//CAMBIA EL POKEMON DE LA CADENA DE EVOLUCIÓN DQUE SE SELECCIONA
 	const cambiarEvol = (p) => {
 		setDataCard(p)
+	}
+
+	const mostrarImageEvol = (pokemon) => {
+		console.log(thePokemon);
+		if (evolImgURL + pokemon?.id + ".gif") {
+			setImg(evolImgURL + pokemon?.id + ".gif")
+			return img
+		} else {
+			setImg(imgURL + pokemon?.id + ".png")
+			return img
+		}
 	}
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
@@ -59,6 +71,7 @@ const PokeDetails = () => {
 							actualIdUrl = urlId
 						}
 					}
+
 					makeEvolChain(chain.species.url)
 
 					//AGREGA AL ARRAY LAS EVOLUCIONES CUANDO SON MÁS DE 2
@@ -103,38 +116,37 @@ const PokeDetails = () => {
 			<div className='pokeDetails'>
 				<div className='pokeDetailContainer'>
 					<div className='pokeDetailMain'>
-
-
-
-
 						<div className='pokemon'>
 							<div className='pokemonImage'>
 
 								<div className='imageP'>
-									<img src={imgURL + dataCard.id + ".png"} alt='' />
+									<img src={imgURL + dataCard?.id + ".png"} alt='' />
 								</div>
 							</div>
 							<div className="evolucionContainer">
 								{
-									evolChainGot?.map((pokemon) => (
-										<div className='evolucion'
-											key={pokemon?.id}
-											style={pokemon?.id === id ? evolStyles : null}
-											onClick={() => { cambiarEvol(pokemon) }}
-										>
-											<div className='evolucion-circulo'>
-												<figure>
-													<img
-														src={evolImgURL + pokemon?.id + ".gif"}
-														alt=''
-													/>
-												</figure>
+									evolChainGot?.map((pokemon) => {
+										setThePokemon(thePokemon.push(pokemon));
+										(
+											<div className='evolucion'
+												key={pokemon?.id}
+												style={pokemon?.id === id ? evolStyles : null}
+												onClick={() => cambiarEvol(pokemon)}
+											>
+												<div className='evolucion-circulo'>
+													<figure>
+														<img
+															src={mostrarImageEvol(pokemon)}
+															alt=''
+														/>
+													</figure>
+												</div>
+												<div className='evolucion-datos'>
+													<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
+												</div>
 											</div>
-											<div className='evolucion-datos'>
-												<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
-											</div>
-										</div>
-									)
+										)
+									}
 									)
 								}
 							</div>
