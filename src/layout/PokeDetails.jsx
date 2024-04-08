@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
+import axios from "axios";
 import { MiContexto } from "../context/context"
 import { getIdOfUrl } from "../utils/getIdOfUrl"
 import { getPokemon } from "../utils/getPokemon";
@@ -16,8 +17,6 @@ const PokeDetails = () => {
 	const { dataCard, setDataCard } = context
 	const [evolChain, setEvolChain] = useState([])
 	const [evolChainGot, setEvolChainGot] = useState([])
-	const [img, setImg] = useState("");
-	const [thePokemon, setThePokemon] = useState([])
 	const { id } = dataCard
 	const strId = String(id)
 
@@ -39,17 +38,6 @@ const PokeDetails = () => {
 		setDataCard(p)
 	}
 
-	const mostrarImageEvol = (pokemon) => {
-		console.log(thePokemon);
-		if (evolImgURL + pokemon?.id + ".gif") {
-			setImg(evolImgURL + pokemon?.id + ".gif")
-			return img
-		} else {
-			setImg(imgURL + pokemon?.id + ".png")
-			return img
-		}
-	}
-
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
 		fetch(dataCard.species.url)
@@ -64,14 +52,13 @@ const PokeDetails = () => {
 
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
 					const makeEvolChain = (chain) => {
-						setEvolChain(evolChain?.push(chain))
+						setEvolChain(evolChain.push(chain))
 						urlId = getIdOfUrl(chain).toString()
 						if (urlId === strId) {
 							actualUrl = chain
 							actualIdUrl = urlId
 						}
 					}
-
 					makeEvolChain(chain.species.url)
 
 					//AGREGA AL ARRAY LAS EVOLUCIONES CUANDO SON MÁS DE 2
@@ -104,12 +91,10 @@ const PokeDetails = () => {
 					})
 
 				}
-
 				getEvolves(data.chain)
 
 			})
 	}, [evolChainGot])
-
 
 	return (
 		<div className="contentPokeDetails">
@@ -125,28 +110,26 @@ const PokeDetails = () => {
 							</div>
 							<div className="evolucionContainer">
 								{
-									evolChainGot?.map((pokemon) => {
-										setThePokemon(thePokemon.push(pokemon));
-										(
-											<div className='evolucion'
-												key={pokemon?.id}
-												style={pokemon?.id === id ? evolStyles : null}
-												onClick={() => cambiarEvol(pokemon)}
-											>
-												<div className='evolucion-circulo'>
-													<figure>
-														<img
-															src={mostrarImageEvol(pokemon)}
-															alt=''
-														/>
-													</figure>
-												</div>
-												<div className='evolucion-datos'>
-													<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
-												</div>
+									evolChainGot?.map((pokemon) =>
+									(
+										<div className='evolucion'
+											key={pokemon?.id}
+											style={pokemon?.id === id ? evolStyles : null}
+											onClick={() => cambiarEvol(pokemon)}
+										>
+											<div className='evolucion-circulo'>
+												<figure>
+													<img
+														src={evolImgURL + pokemon?.id + ".gif"}
+														alt=''
+													/>
+												</figure>
 											</div>
-										)
-									}
+											<div className='evolucion-datos'>
+												<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
+											</div>
+										</div>
+									)
 									)
 								}
 							</div>
