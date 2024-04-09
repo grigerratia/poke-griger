@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { MiContexto } from "../context/context"
 import { getIdOfUrl } from "../utils/getIdOfUrl"
 import { getPokemon } from "../utils/getPokemon";
+import axios from "axios"
 import Evolutions from "../Components/Evolutions";
 
 import "../styles/PokeDetails.css"
@@ -99,11 +100,11 @@ const PokeDetails = () => {
 					<div className='pokeDetailMain'>
 						<div className='pokemon'>
 							<div className='pokemonImage'>
-
 								<div className='imageP'>
 									<img src={imgURL + dataCard?.id + ".png"} alt='' />
 								</div>
 							</div>
+
 							<Evolutions id={id} />
 						</div>
 

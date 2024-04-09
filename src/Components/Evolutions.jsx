@@ -22,7 +22,7 @@ const Evolutions = ({ id }) => {
   return (
     <div className="evolucionContainer">
       {
-        evolChainGot.sort((a, b) => a.id - b.id)?.map((pokemon) =>
+        evolChainGot?.sort((a, b) => a.id - b.id)?.map((pokemon) =>
         (
           <div className='evolucion'
             key={pokemon?.id}
