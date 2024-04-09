@@ -12,6 +12,7 @@ export default function MiContextoProveedor({ children }) {
 	const [listPokemons, setListPokemons] = useState([]);
 	const [beforeEvolution, setBeforeEvolution] = useState([]);
 	const [nextEvolution, setNextEvolution] = useState([]);
+	const [evolChainGot, setEvolChainGot] = useState([])
 
 	return (
 		<MiContexto.Provider
@@ -31,7 +32,9 @@ export default function MiContextoProveedor({ children }) {
 				beforeEvolution,
 				setBeforeEvolution,
 				nextEvolution,
-				setNextEvolution
+				setNextEvolution,
+				evolChainGot,
+				setEvolChainGot
 			}}>
 			{children}
 		</MiContexto.Provider>

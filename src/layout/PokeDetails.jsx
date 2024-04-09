@@ -1,22 +1,20 @@
 import React, { useContext, useEffect, useState } from "react"
-import axios from "axios";
 import { MiContexto } from "../context/context"
 import { getIdOfUrl } from "../utils/getIdOfUrl"
 import { getPokemon } from "../utils/getPokemon";
+import Evolutions from "../Components/Evolutions";
 
 import "../styles/PokeDetails.css"
 import PokeDetailsCard from "./PokeDetailsCard"
 
 const PokeDetails = () => {
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
-	const evolImgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/"
-	const evolStyles = { border: "solid 1px #484747", borderRadius: "8px" }
 
 	const context = useContext(MiContexto)
+	const { dataCard, setEvolChainGot } = context
 
-	const { dataCard, setDataCard } = context
 	const [evolChain, setEvolChain] = useState([])
-	const [evolChainGot, setEvolChainGot] = useState([])
+	const [render, setRender] = useState(false)
 	const { id } = dataCard
 	const strId = String(id)
 
@@ -29,14 +27,9 @@ const PokeDetails = () => {
 	//CIERRA LA VISTA DE DETALLES DEL POKEMON
 	const togglePoDe = () => {
 		context.verPokeDe
-			? context.setVerPokeDe(false)
+			? (context.setVerPokeDe(false), setEvolChainGot([]))
 			: context.setVerPokeDe(true)
 	};
-
-	//CAMBIA EL POKEMON DE LA CADENA DE EVOLUCIÓN DQUE SE SELECCIONA
-	const cambiarEvol = (p) => {
-		setDataCard(p)
-	}
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
@@ -86,7 +79,10 @@ const PokeDetails = () => {
 							.then(res => res.json())
 							.then(data => {
 								varEvolChain.push(data)
-								if (i === evolChain.length - 1) setEvolChainGot(varEvolChain.sort((a, b) => a.id - b.id));
+								if (i === evolChain.length - 1) {
+									setEvolChainGot(varEvolChain)
+									setRender(render ? true : false)
+								}
 							})
 					})
 
@@ -94,7 +90,7 @@ const PokeDetails = () => {
 				getEvolves(data.chain)
 
 			})
-	}, [evolChainGot])
+	}, [render])
 
 	return (
 		<div className="contentPokeDetails">
@@ -108,31 +104,7 @@ const PokeDetails = () => {
 									<img src={imgURL + dataCard?.id + ".png"} alt='' />
 								</div>
 							</div>
-							<div className="evolucionContainer">
-								{
-									evolChainGot?.map((pokemon) =>
-									(
-										<div className='evolucion'
-											key={pokemon?.id}
-											style={pokemon?.id === id ? evolStyles : null}
-											onClick={() => cambiarEvol(pokemon)}
-										>
-											<div className='evolucion-circulo'>
-												<figure>
-													<img
-														src={evolImgURL + pokemon?.id + ".gif"}
-														alt=''
-													/>
-												</figure>
-											</div>
-											<div className='evolucion-datos'>
-												<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
-											</div>
-										</div>
-									)
-									)
-								}
-							</div>
+							<Evolutions id={id} />
 						</div>
 
 
