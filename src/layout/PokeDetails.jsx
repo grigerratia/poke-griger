@@ -31,8 +31,16 @@ const PokeDetails = () => {
 			: context.setVerPokeDe(true)
 	};
 
-	const loteAnterior = () => {
+	const pokemonAnterior = () => {
 		getPokemon(String(id - 1))
+			.then(res => res.json())
+			.then(data => {
+				setDataCard(data)
+			})
+	}
+
+	const pokemonSiguiente = () => {
+		getPokemon(String(id + 1))
 			.then(res => res.json())
 			.then(data => {
 				setDataCard(data)
@@ -124,8 +132,8 @@ const PokeDetails = () => {
 
 
 					<div className='beforeNextPokemon'>
-						<div className='beNePo beforeP' onClick={loteAnterior}>Before</div>
-						<div className='beNePo nextP'>Next</div>
+						<div className='beNePo beforeP' onClick={pokemonAnterior}>Before</div>
+						<div className='beNePo nextP' onClick={pokemonSiguiente}>Next</div>
 					</div>
 				</div>
 				<div className='salirPokeDetails' onClick={togglePoDe}>
