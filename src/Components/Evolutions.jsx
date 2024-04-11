@@ -3,6 +3,8 @@ import { MiContexto } from "../context/context"
 
 const Evolutions = ({ id }) => {
   const evolImgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/"
+  const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
+
   const evolStyles = { border: "solid 1px #484747", borderRadius: "8px" }
 
   const context = useContext(MiContexto)

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react"
 import { MiContexto } from "../context/context"
 import { getIdOfUrl } from "../utils/getIdOfUrl"
 import { getPokemon } from "../utils/getPokemon";
-import axios from "axios"
 import Evolutions from "../Components/Evolutions";
 
 import "../styles/PokeDetails.css"
@@ -12,7 +11,7 @@ const PokeDetails = () => {
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 
 	const context = useContext(MiContexto)
-	const { dataCard, setEvolChainGot } = context
+	const { dataCard, setDataCard, setEvolChainGot } = context
 
 	const [evolChain, setEvolChain] = useState([])
 	const [render, setRender] = useState(false)
@@ -31,6 +30,14 @@ const PokeDetails = () => {
 			? (context.setVerPokeDe(false), setEvolChainGot([]))
 			: context.setVerPokeDe(true)
 	};
+
+	const loteAnterior = () => {
+		getPokemon(String(id - 1))
+			.then(res => res.json())
+			.then(data => {
+				setDataCard(data)
+			})
+	}
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
@@ -117,7 +124,7 @@ const PokeDetails = () => {
 
 
 					<div className='beforeNextPokemon'>
-						<div className='beNePo beforeP'>Before</div>
+						<div className='beNePo beforeP' onClick={loteAnterior}>Before</div>
 						<div className='beNePo nextP'>Next</div>
 					</div>
 				</div>
