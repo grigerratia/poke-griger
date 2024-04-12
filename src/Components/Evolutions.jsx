@@ -8,7 +8,7 @@ const Evolutions = ({ id }) => {
   const evolStyles = { border: "solid 1px #484747", borderRadius: "8px" }
 
   const context = useContext(MiContexto)
-  const { setDataCard, evolChainGot } = context
+  const { dataCard, setDataCard, evolChainGot } = context
 
   const [evolutions, setEvolutions] = useState([])
 

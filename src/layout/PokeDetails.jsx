@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { MiContexto } from "../context/context"
 import { getIdOfUrl } from "../utils/getIdOfUrl"
 import { getPokemon } from "../utils/getPokemon";
+import axios from "axios";
 import Evolutions from "../Components/Evolutions";
 
 import "../styles/PokeDetails.css"
@@ -15,7 +16,8 @@ const PokeDetails = () => {
 
 	const [evolChain, setEvolChain] = useState([])
 	const [render, setRender] = useState(false)
-	const { id } = dataCard
+	const { id, species } = dataCard
+	const [idI, setidI] = useState(id)
 	const strId = String(id)
 
 	let urlId
@@ -31,19 +33,23 @@ const PokeDetails = () => {
 			: context.setVerPokeDe(true)
 	};
 
-	const pokemonAnterior = () => {
-		getPokemon(String(id - 1))
-			.then(res => res.json())
-			.then(data => {
-				setDataCard(data)
+	//NAVEGAR HACIA LA ANTERIOR O SIGUIENTE CADENA DE EVOLUCINES
+	const navegarEnCadenas = (op) => {
+		axios.get(species.url) //Trae los datos de la especie
+			.then(response => {
+				const urlEvCh = "https://pokeapi.co/api/v2/evolution-chain/"
+				if (op === "-") {
+					const idChain = String(getIdOfUrl(response.data.evolution_chain.url) - 1)
+					return axios.get(urlEvCh + idChain)
+				}
+				const idChain = String(getIdOfUrl(response.data.evolution_chain.url) + 1)
+				return axios.get(urlEvCh + idChain)
 			})
-	}
-
-	const pokemonSiguiente = () => {
-		getPokemon(String(id + 1))
+			.then(response => getPokemon(String(getIdOfUrl(response.data.chain.species.url))))
 			.then(res => res.json())
 			.then(data => {
 				setDataCard(data)
+				setidI(id)
 			})
 	}
 
@@ -106,7 +112,7 @@ const PokeDetails = () => {
 				getEvolves(data.chain)
 
 			})
-	}, [render])
+	}, [render, idI])
 
 	return (
 		<div className="contentPokeDetails">
@@ -132,8 +138,8 @@ const PokeDetails = () => {
 
 
 					<div className='beforeNextPokemon'>
-						<div className='beNePo beforeP' onClick={pokemonAnterior}>Before</div>
-						<div className='beNePo nextP' onClick={pokemonSiguiente}>Next</div>
+						<div className='beNePo beforeP' onClick={() => navegarEnCadenas("-")}>Before</div>
+						<div className='beNePo nextP' onClick={() => navegarEnCadenas("+")}>Next</div>
 					</div>
 				</div>
 				<div className='salirPokeDetails' onClick={togglePoDe}>
