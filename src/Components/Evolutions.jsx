@@ -1,16 +1,16 @@
 import React, { useContext, useState, useEffect } from "react"
 import { MiContexto } from "../context/context"
 
-const Evolutions = ({ id }) => {
+const Evolutions = () => {
+
+  const evolStyles = { border: "solid 1px #484747", borderRadius: "8px" }
   const evolImgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/"
   const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 
-  const evolStyles = { border: "solid 1px #484747", borderRadius: "8px" }
-
   const context = useContext(MiContexto)
-  const { dataCard, setDataCard, evolChainGot } = context
-
-  const [evolutions, setEvolutions] = useState([])
+  const { setDataCard, evolChainGot, idDataCard } = context
+  const [evolutions, setEvolutions] = useState(evolChainGot)
+  const id = idDataCard
 
   useEffect(() => {
     setEvolutions(evolChainGot)

@@ -13,6 +13,7 @@ export default function MiContextoProveedor({ children }) {
 	const [beforeEvolution, setBeforeEvolution] = useState([]);
 	const [nextEvolution, setNextEvolution] = useState([]);
 	const [evolChainGot, setEvolChainGot] = useState([])
+	const [idDataCard, setIdDataCard] = useState([])
 
 	return (
 		<MiContexto.Provider
@@ -34,7 +35,9 @@ export default function MiContextoProveedor({ children }) {
 				nextEvolution,
 				setNextEvolution,
 				evolChainGot,
-				setEvolChainGot
+				setEvolChainGot,
+				idDataCard,
+				setIdDataCard
 			}}>
 			{children}
 		</MiContexto.Provider>

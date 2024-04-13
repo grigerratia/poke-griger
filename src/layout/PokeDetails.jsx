@@ -9,16 +9,34 @@ import "../styles/PokeDetails.css"
 import PokeDetailsCard from "./PokeDetailsCard"
 
 const PokeDetails = () => {
+
+	// EVOLUTIONS::::::::::::::::::::::::::::::
+
+	const evolStyles = { border: "solid 1px #484747", borderRadius: "8px" }
+	const evolImgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/"
+
+
+	// useEffect(() => {
+	// 	setEvolutions(evolChainGot)
+	// }, [evolutions, evolChainGot])
+
+	//CAMBIA EL POKEMON DE LA CADENA DE EVOLUCIÓN DQUE SE SELECCIONA
+	const cambiarEvol = (p) => {
+		setDataCard(p)
+	}
+
+	// EVOLUTIONS::::::::::::::::::::::::::::::
+
+
 	const imgURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 
 	const context = useContext(MiContexto)
-	const { dataCard, setDataCard, setEvolChainGot } = context
+	const { dataCard, setDataCard, evolChainGot, setEvolChainGot, setIdDataCard } = context
+	const [evolutions, setEvolutions] = useState(evolChainGot)
 
 	const [evolChain, setEvolChain] = useState([])
 	const [render, setRender] = useState(false)
-	const { id, species } = dataCard
-	const [idI, setidI] = useState(id)
-	const strId = String(id)
+	let { id } = dataCard
 
 	let urlId
 	let actualUrl
@@ -35,7 +53,10 @@ const PokeDetails = () => {
 
 	//NAVEGAR HACIA LA ANTERIOR O SIGUIENTE CADENA DE EVOLUCINES
 	const navegarEnCadenas = (op) => {
-		axios.get(species.url) //Trae los datos de la especie
+		(context.setVerPokeDe(false))
+
+		const dataPokemon = dataCard
+		axios.get(dataPokemon.species.url) //Trae los datos de la especie
 			.then(response => {
 				const urlEvCh = "https://pokeapi.co/api/v2/evolution-chain/"
 				if (op === "-") {
@@ -49,27 +70,29 @@ const PokeDetails = () => {
 			.then(res => res.json())
 			.then(data => {
 				setDataCard(data)
-				setidI(id)
+				setIdDataCard(dataCard.id)
+				setRender(render ? true : false)
+				context.setVerPokeDe(true)
 			})
 	}
 
 	//LLAMA LA ESPECIE DEL POKEMON PARA VER LOS DATOS DE SU CADENA DE EVOLUCIÓN
 	useEffect(() => {
-		fetch(dataCard.species.url)
+		const dataPokemon = dataCard
+		fetch(dataPokemon.species.url)
 			.then(res => res.json())
 			.then(data => data)
 			.then(data => fetch(data.evolution_chain.url))
 			.then(res => res.json())
 			.then(data => {
-
 				const getEvolves = (chain) => {
 					if (!chain) return
 
 					//AGREGA AL ARRAY EL PRIMER POKEMON DE LA CADENA
 					const makeEvolChain = (chain) => {
-						setEvolChain(evolChain.push(chain))
+						setEvolChain(evolChain?.push(chain))
 						urlId = getIdOfUrl(chain).toString()
-						if (urlId === strId) {
+						if (urlId === id) {
 							actualUrl = chain
 							actualIdUrl = urlId
 						}
@@ -97,6 +120,7 @@ const PokeDetails = () => {
 
 					//TRAE LOS DATOS DE TODA LA CADENA DE EVOLUCIÓN
 					evolChain.map((el, i) => {
+						setIdDataCard(dataCard.id)
 						getPokemon(getIdOfUrl(el).toString())
 							.then(res => res.json())
 							.then(data => {
@@ -107,12 +131,11 @@ const PokeDetails = () => {
 								}
 							})
 					})
-
 				}
 				getEvolves(data.chain)
 
 			})
-	}, [render, idI])
+	}, [render, evolutions, evolChainGot])
 
 	return (
 		<div className="contentPokeDetails">
@@ -126,7 +149,38 @@ const PokeDetails = () => {
 								</div>
 							</div>
 
-							<Evolutions id={id} />
+
+							{/* EVOLUTIONS::::::::::::::::::::::: */}
+
+							<div className="evolucionContainer">
+								{
+									evolChainGot.sort((a, b) => a.id - b.id)?.map((pokemon) =>
+									(
+										<div className='evolucion'
+											key={pokemon?.id}
+											style={pokemon?.id === id ? evolStyles : null}
+											onClick={() => cambiarEvol(pokemon)}
+										>
+											<div className='evolucion-circulo'>
+												<figure>
+													<img
+														src={evolImgURL + pokemon?.id + ".gif"}
+														alt=''
+													/>
+												</figure>
+											</div>
+											<div className='evolucion-datos'>
+												<div className='evolucion-datos--nombre' >{pokemon?.name}</div>
+											</div>
+										</div>
+									)
+									)
+								}
+							</div>
+
+
+							{/* EVOLUTIONS::::::::::::::::::::::: */}
+
 						</div>
 
 
