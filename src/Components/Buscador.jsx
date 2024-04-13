@@ -9,15 +9,28 @@ const Buscador = () => {
 	const [pokemonSelec, setPokemonSelec] = useState("");
 	const [peticionRealizada, setPeticionRealizada] = useState(false);
 	const [pokemonList, setPokemonList] = useState(false);
-	const { filteredList, setFilteredList } = context
+	const { setFilteredList } = context
 
 
-	fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
-		.then((res) => res.json())
-		.then((data) => {
-			// setPokemonList([...data.results].map((el) => el.name))
-			setPokemonList(data.results)
-		});
+	const getListPokemons = () => {
+		fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+			.then((res) => res.json())
+			.then((data) => {
+				setPokemonList(data.results)
+			});
+	}
+	getListPokemons()
+
+	const clearSearched = () => {
+		const buscador = document.querySelector("#inputBuscar");
+		if (buscador.value === "") return
+		buscador.value = ""
+		getListPokemons()
+		setPokemonSelec("")
+		setFilteredList([...pokemonList].filter(dato => dato.name.toLowerCase().includes(buscador.value.toLowerCase())))
+		setPeticionRealizada(true)
+		context.setVerPokeList(true)
+	}
 
 	const buscarPokemon = () => {
 		const buscador = document.querySelector("#inputBuscar");
@@ -45,6 +58,7 @@ const Buscador = () => {
 
 	return (
 		<div className='buscador'>
+			<div className="xBuscador" onClick={clearSearched}></div>
 			<input
 				type='text'
 				placeholder='Buscar pokemon'
