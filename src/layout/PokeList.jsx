@@ -16,8 +16,8 @@ const PokeList = () => {
 
 	//siguiente lote de la lista de pokemons
 	const nextBatch = () => {
-		setPokemonsInit(pokemonsInit + 12)
-		setPokemonsEnd(pokemonsEnd + 12)
+		setPokemonsInit(pokemonsInit + 12) //13
+		setPokemonsEnd(pokemonsEnd + 12) //24
 	}
 
 	useEffect(() => {
