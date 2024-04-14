@@ -10,6 +10,16 @@ const PokeList = () => {
 	const context = useContext(MiContexto);
 	const { filteredList, listPokemons, setListPokemons } = context;
 
+	const [pokemonsInit, setPokemonsInit] = useState(1)
+	const [pokemonsEnd, setPokemonsEnd] = useState(12)
+
+
+	//siguiente lote de la lista de pokemons
+	const nextBatch = () => {
+		setPokemonsInit(pokemonsInit + 12)
+		setPokemonsEnd(pokemonsEnd + 12)
+	}
+
 	useEffect(() => {
 		filteredList === false
 			? getPokemon("")
@@ -25,7 +35,7 @@ const PokeList = () => {
 			<div className='pokeList'>
 				{listPokemons &&
 					listPokemons.map((el, i) => {
-						if (i < 12) return <PokeItem key={el.name} data={el} />;
+						if (i + 1 >= pokemonsInit && i < pokemonsEnd) return <PokeItem key={el.name} data={el} />;
 					})
 				}
 				{!listPokemons && <div>Pokemon no encontrado</div>}
@@ -36,7 +46,7 @@ const PokeList = () => {
 				<div>1</div>
 				<div>2</div>
 				<div>3</div>
-				<div>{">>"}</div>
+				<div onClick={nextBatch}>{">>"}</div>
 			</div>
 		</div>
 	);
