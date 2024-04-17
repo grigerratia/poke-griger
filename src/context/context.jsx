@@ -14,7 +14,10 @@ export default function MiContextoProveedor({ children }) {
 	const [nextEvolution, setNextEvolution] = useState([]);
 	const [evolChainGot, setEvolChainGot] = useState([])
 	const [idDataCard, setIdDataCard] = useState([])
-	const [countNav, setCountNav] = useState(1)
+	const [lengthBatch, setLengthBatch] = useState({
+		initBatch: 1,
+		endBatch: 12
+	})
 
 	return (
 		<MiContexto.Provider
@@ -39,8 +42,8 @@ export default function MiContextoProveedor({ children }) {
 				setEvolChainGot,
 				idDataCard,
 				setIdDataCard,
-				countNav,
-				setCountNav
+				lengthBatch,
+				setLengthBatch
 			}}>
 			{children}
 		</MiContexto.Provider>

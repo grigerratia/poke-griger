@@ -4,7 +4,7 @@ import "../styles/PokeCard.css";
 
 const PokeCard = () => {
 	const context = useContext(MiContexto);
-	const { dataCard } = context;
+	const { dataCard, setLengthBatch } = context;
 
 	const { name, types, abilities, id } = dataCard;
 

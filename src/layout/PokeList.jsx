@@ -8,25 +8,24 @@ import "../styles/PokeList.css";
 
 const PokeList = () => {
 	const context = useContext(MiContexto);
-	const { filteredList, listPokemons, setListPokemons, countNav, setCountNav } = context;
+	const { filteredList, listPokemons, setListPokemons, lengthBatch, setLengthBatch } = context;
 
 
-	const [pokemonsInit, setPokemonsInit] = useState((12 * countNav) - 11)
-	const [pokemonsEnd, setPokemonsEnd] = useState(12)
+
 
 	//siguiente y anterior lote de la lista de pokemons
-	const nextBatch = (op) => {
+	const navBatch = (op) => {
 		if (op === "next") {
-			setCountNav(countNav + 1)
-			setPokemonsInit((12 * countNav) - 11) //13
-			setPokemonsEnd(pokemonsInit + 12) //24
-			console.log({ pokemonsInit: pokemonsInit });
-			console.log({ pokemonsEnd: pokemonsEnd });
+			setLengthBatch({
+				initBatch: lengthBatch.initBatch + 12,
+				endBatch: lengthBatch.endBatch + 12
+			})
 		} else {
-			if (countNav === 1) return
-			setPokemonsInit(12 * countNav - 11) //13
-			setPokemonsEnd(pokemonsEnd - 12) //24
-			setCountNav(countNav - 1)
+			if (lengthBatch.initBatch === 1) return
+			setLengthBatch({
+				initBatch: lengthBatch.initBatch - 12,
+				endBatch: lengthBatch.endBatch - 12
+			})
 		}
 	}
 
@@ -45,7 +44,7 @@ const PokeList = () => {
 			<div className='pokeList'>
 				{listPokemons &&
 					listPokemons.map((el, i) => {
-						if (i + 1 >= pokemonsInit && i < pokemonsEnd) return (<PokeItem key={el.name} data={el} />)
+						if (i + 1 >= lengthBatch.initBatch && i < lengthBatch.endBatch) return (<PokeItem key={el.name} data={el} />)
 					})
 				}
 				{!listPokemons && <div>Pokemon no encontrado</div>}
@@ -53,12 +52,12 @@ const PokeList = () => {
 
 			<div className='listIndex'>
 				{
-					countNav != 0 && <div onClick={() => nextBatch("before")}>{"<<"}</div>
+					lengthBatch.initBatch != 1 && <div onClick={() => navBatch("before")}>{"<<"}</div>
 				}
-				<div>1</div>
 				<div>2</div>
 				<div>3</div>
-				<div onClick={() => nextBatch("next")}>{">>"}</div>
+				<div>4</div>
+				<div onClick={() => navBatch("next")}>{">>"}</div>
 			</div>
 		</div>
 	);
