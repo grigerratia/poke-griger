@@ -36,15 +36,14 @@ const PokeList = () => {
 	//siguiente y anterior lote de la lista de pokemons por números
 	const navNum = (num) => {
 		if (num === count) return
-		setCount(num)
-		console.log(num);
-		setLengthBatch({
-			initBatch: (12 * num),
-			endBatch: (12 * num) + 11
-		})
 
+		setLengthBatch({
+			initBatch: (12 * num) - 11,
+			endBatch: (12 * num)
+		})
+		setCount(num)
 		if (num === firstNum.at(-1)) {
-			setFirstNum(firstNum.map(num => num++))
+			setFirstNum(firstNum.map(num => num + 6))
 		}
 	}
 
