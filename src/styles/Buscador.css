@@ -43,7 +43,7 @@
 
 	& .xBuscador{
 		position: absolute;
-		background-image: url(../../public/img/equis.svg);
+		background-image: url(/img/equis.svg);
 		background-size: cover;
 		width: 20px;
 		height: 20px;
@@ -52,7 +52,7 @@
 		transition: all 0.2s;
 		
 		&:hover {
-			background-image: url(../../public/img/equis_roja.svg);
+			background-image: url(/img/equis_roja.svg);
 		}
 		&:active {
 			width: 22px;
