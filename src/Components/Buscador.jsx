@@ -9,7 +9,7 @@ const Buscador = () => {
 	const [pokemonSelec, setPokemonSelec] = useState("");
 	const [peticionRealizada, setPeticionRealizada] = useState(false);
 	const [pokemonList, setPokemonList] = useState(false);
-	const { setFilteredList } = context
+	const { setFilteredList, setCount, setFirstNum } = context
 
 
 	const getListPokemons = () => {
@@ -33,6 +33,9 @@ const Buscador = () => {
 	}
 
 	const buscarPokemon = () => {
+		setCount(0)
+		setFirstNum([1, 2, 3, 4, 5, 6])
+		getListPokemons()
 		const buscador = document.querySelector("#inputBuscar");
 		setPokemonSelec(buscador.value);
 		if (buscador.value === "") context.setVerPokeList(true);
@@ -54,7 +57,7 @@ const Buscador = () => {
 				}
 			});
 		}
-	}, [pokemonSelec, peticionRealizada]);
+	}, [pokemonSelec, peticionRealizada, pokemonList]);
 
 	return (
 		<div className='buscador'>
