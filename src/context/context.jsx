@@ -18,6 +18,8 @@ export default function MiContextoProveedor({ children }) {
 		initBatch: 1,
 		endBatch: 12
 	})
+	const [count, setCount] = useState(1)
+	const [firstNum, setFirstNum] = useState([1, 2, 3, 4, 5, 6])
 
 	return (
 		<MiContexto.Provider
@@ -43,7 +45,11 @@ export default function MiContextoProveedor({ children }) {
 				idDataCard,
 				setIdDataCard,
 				lengthBatch,
-				setLengthBatch
+				setLengthBatch,
+				count,
+				setCount,
+				firstNum,
+				setFirstNum
 			}}>
 			{children}
 		</MiContexto.Provider>

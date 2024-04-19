@@ -9,10 +9,7 @@ import "../styles/PokeList.css";
 const PokeList = () => {
 	const context = useContext(MiContexto);
 	const numStyles = { border: "solid 1px #484747", borderRadius: "8px" }
-	const { filteredList, listPokemons, setListPokemons, lengthBatch, setLengthBatch } = context;
-	const [firstNum, setFirstNum] = useState([1, 2, 3, 4, 5, 6])
-	const [count, setCount] = useState(1)
-
+	const { filteredList, listPokemons, setListPokemons, lengthBatch, setLengthBatch, count, setCount, firstNum, setFirstNum } = context;
 
 	//siguiente y anterior lote de la lista de pokemons por números
 	const navNum = (num) => {
@@ -82,7 +79,7 @@ const PokeList = () => {
 					setListPokemons(data.results);
 				})
 			: setListPokemons(filteredList);
-	}, [filteredList, count]);
+	}, [filteredList]);
 
 	return (
 		<div className='pokelistContainer'>
