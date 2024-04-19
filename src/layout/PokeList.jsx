@@ -13,11 +13,32 @@ const PokeList = () => {
 	const [count, setCount] = useState(1)
 
 
+	//siguiente y anterior lote de la lista de pokemons por números
+	const navNum = (num) => {
+		if (num === count) return
 
+		setLengthBatch({
+			initBatch: (12 * num) - 11,
+			endBatch: (12 * num)
+		})
+		setCount(num)
+	}
 
 	//siguiente y anterior lote de la lista de pokemons por flechas
 	const navBatch = (op) => {
+
 		if (op === "next") {
+
+			if (firstNum.at(-1) === count) {
+				navDoubleBatch("next")
+				return
+			}
+
+			if (firstNum[0] === count) {
+				navDoubleBatch("before")
+				return
+			}
+
 			setLengthBatch({
 				initBatch: lengthBatch.initBatch + 12,
 				endBatch: lengthBatch.endBatch + 12
@@ -33,19 +54,28 @@ const PokeList = () => {
 		}
 	}
 
-	//siguiente y anterior lote de la lista de pokemons por números
-	const navNum = (num) => {
-		if (num === count) return
-
-		setLengthBatch({
-			initBatch: (12 * num) - 11,
-			endBatch: (12 * num)
-		})
-		setCount(num)
-		if (num === firstNum.at(-1)) {
+	//Siguiente lote de números de la lista
+	const navDoubleBatch = (op) => {
+		if (op === "next") {
 			setFirstNum(firstNum.map(num => num + 6))
+			const newFirstNum = firstNum.map(num => num + 6)
+			setLengthBatch({
+				initBatch: (12 * newFirstNum[0]) - 11,
+				endBatch: (12 * newFirstNum[0])
+			})
+			setCount(firstNum[0])
+		} else {
+			if (lengthBatch.initBatch === 1) return
+			setFirstNum(firstNum.map(num => num - 6))
+			const newFirstNum = firstNum.map(num => num - 6)
+			setLengthBatch({
+				initBatch: (12 * newFirstNum[0]) - 11,
+				endBatch: (12 * newFirstNum[0])
+			})
+			setCount(firstNum[0])
 		}
 	}
+
 
 	useEffect(() => {
 		filteredList === false
@@ -70,14 +100,18 @@ const PokeList = () => {
 
 			<div className='listIndex'>
 				{
-					lengthBatch.initBatch != 1 && <div onClick={() => navBatch("before")}>{"<<"}</div>
+					lengthBatch.initBatch != 1 && <div onClick={() => navDoubleBatch("before")}>{"<<·"}</div>
+				}
+				{
+					lengthBatch.initBatch != 1 && <div onClick={() => navBatch("before")}>{"<·"}</div>
 				}
 				{
 					firstNum.map(el => (
 						<div key={el} onClick={() => navNum(el)}>{el}</div>
 					))
 				}
-				<div onClick={() => navBatch("next")}>{">>"}</div>
+				<div onClick={() => navBatch("next")}>{"·>"}</div>
+				<div onClick={() => navDoubleBatch("next")}>{"·>>"}</div>
 			</div>
 		</div>
 	);
