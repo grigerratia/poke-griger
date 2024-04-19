@@ -8,6 +8,7 @@ import "../styles/PokeList.css";
 
 const PokeList = () => {
 	const context = useContext(MiContexto);
+	const numStyles = { border: "solid 1px #484747", borderRadius: "8px" }
 	const { filteredList, listPokemons, setListPokemons, lengthBatch, setLengthBatch } = context;
 	const [firstNum, setFirstNum] = useState([1, 2, 3, 4, 5, 6])
 	const [count, setCount] = useState(1)
@@ -26,25 +27,21 @@ const PokeList = () => {
 
 	//siguiente y anterior lote de la lista de pokemons por flechas
 	const navBatch = (op) => {
-
 		if (op === "next") {
-
 			if (firstNum.at(-1) === count) {
 				navDoubleBatch("next")
 				return
 			}
-
-			if (firstNum[0] === count) {
-				navDoubleBatch("before")
-				return
-			}
-
+			setCount(count + 1)
 			setLengthBatch({
 				initBatch: lengthBatch.initBatch + 12,
 				endBatch: lengthBatch.endBatch + 12
 			})
-			setCount(count + 1)
 		} else {
+			if (firstNum[0] === count) {
+				navDoubleBatch("before")
+				return
+			}
 			if (lengthBatch.initBatch === 1) return
 			setLengthBatch({
 				initBatch: lengthBatch.initBatch - 12,
@@ -57,22 +54,22 @@ const PokeList = () => {
 	//Siguiente lote de números de la lista
 	const navDoubleBatch = (op) => {
 		if (op === "next") {
+			setCount(firstNum[0] + 6)
 			setFirstNum(firstNum.map(num => num + 6))
 			const newFirstNum = firstNum.map(num => num + 6)
 			setLengthBatch({
 				initBatch: (12 * newFirstNum[0]) - 11,
 				endBatch: (12 * newFirstNum[0])
 			})
-			setCount(firstNum[0])
 		} else {
 			if (lengthBatch.initBatch === 1) return
+			setCount(firstNum[0] - 6)
 			setFirstNum(firstNum.map(num => num - 6))
 			const newFirstNum = firstNum.map(num => num - 6)
 			setLengthBatch({
 				initBatch: (12 * newFirstNum[0]) - 11,
 				endBatch: (12 * newFirstNum[0])
 			})
-			setCount(firstNum[0])
 		}
 	}
 
@@ -85,7 +82,7 @@ const PokeList = () => {
 					setListPokemons(data.results);
 				})
 			: setListPokemons(filteredList);
-	}, [filteredList]);
+	}, [filteredList, count]);
 
 	return (
 		<div className='pokelistContainer'>
@@ -107,7 +104,10 @@ const PokeList = () => {
 				}
 				{
 					firstNum.map(el => (
-						<div key={el} onClick={() => navNum(el)}>{el}</div>
+						<div
+							key={el}
+							style={count === el ? numStyles : null}
+							onClick={() => navNum(el)}>{el}</div>
 					))
 				}
 				<div onClick={() => navBatch("next")}>{"·>"}</div>
