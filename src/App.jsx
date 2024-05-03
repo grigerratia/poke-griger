@@ -19,7 +19,15 @@ function App() {
 						</MiContextoProveedor>
 					}
 				/>
-				<Route path='/favorites' element={<Favorites />} />
+
+				<Route
+					path='/favorites'
+					element={
+						<MiContextoProveedor>
+							<Favorites />
+						</MiContextoProveedor>
+					}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);
