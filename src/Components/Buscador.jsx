@@ -22,7 +22,7 @@ const Buscador = () => {
 	}
 
 	const buscarPokemon = () => {
-		setCount(0)
+		setCount(1)
 		setFirstNum([1, 2, 3, 4, 5, 6])
 		const buscador = document.querySelector("#inputBuscar");
 		setPokemonSelec(buscador.value);

@@ -97,7 +97,7 @@ const PokeList = () => {
 
 			<div className='listIndex'>
 				{
-					lengthBatch.initBatch != 1 && <div onClick={() => navDoubleBatch("before")}>{"<<·"}</div>
+					count > 6 && <div onClick={() => navDoubleBatch("before")}>{"<<·"}</div>
 				}
 				{
 					lengthBatch.initBatch != 1 && <div onClick={() => navBatch("before")}>{"<·"}</div>
