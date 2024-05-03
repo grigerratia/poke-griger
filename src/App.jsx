@@ -1,15 +1,12 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import React, { useEffect } from "react";
 import Index from "./Views/Index.jsx";
-import Favoritos from "./Views/Favoritos.jsx";
+import Favorites from "./Views/Favorites.jsx";
 import MiContextoProveedor from "./context/context.jsx";
 
 import "./App.css";
 
 function App() {
-	// useEffect(() => {
-
-	// }, []);
 
 	return (
 		<BrowserRouter>
@@ -22,7 +19,7 @@ function App() {
 						</MiContextoProveedor>
 					}
 				/>
-				<Route path='/pokemon/favoritos' element={<Favoritos />} />
+				<Route path='/favorites' element={<Favorites />} />
 			</Routes>
 		</BrowserRouter>
 	);

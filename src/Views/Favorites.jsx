@@ -9,7 +9,7 @@ const DataR = () => {
   )
 }
 
-const Favoritos = () => {
+const Favorites = () => {
 
   const irAHome = () => {
     location.href = '/';
@@ -49,4 +49,4 @@ const Favoritos = () => {
   )
 }
 
-export default Favoritos
+export default Favorites
