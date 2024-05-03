@@ -15,6 +15,10 @@ const PokeItem = ({ data }) => {
 	const { setDataCard, setVerPokeList } = context;
 
 
+	const addToFavorites = () => {
+		alert("Añadir a favoritos")
+	}
+
 
 	const verCard = () => {
 		setDataCard(dataP);
@@ -49,6 +53,11 @@ const PokeItem = ({ data }) => {
 					alt={dataP?.name}
 				/>
 			</picture>
+			<div className="addFavorite"
+				onClick={(event) => {
+					event.stopPropagation();
+					addToFavorites();
+				}}><img src="./img/corazon-vacio.png" alt="" /></div>
 		</div>
 	);
 };
