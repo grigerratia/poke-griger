@@ -8,26 +8,15 @@ const Buscador = () => {
 
 	const [pokemonSelec, setPokemonSelec] = useState("");
 	const [peticionRealizada, setPeticionRealizada] = useState(false);
-	const [pokemonList, setPokemonList] = useState(false);
-	const { setFilteredList, setCount, setFirstNum } = context
+	const { setFilteredList, setCount, setFirstNum, allPokemons } = context
 
-
-	const getListPokemons = () => {
-		fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
-			.then((res) => res.json())
-			.then((data) => {
-				setPokemonList(data.results)
-			});
-	}
-	getListPokemons()
 
 	const clearSearched = () => {
 		const buscador = document.querySelector("#inputBuscar");
 		if (buscador.value === "") return
 		buscador.value = ""
-		getListPokemons()
 		setPokemonSelec("")
-		setFilteredList([...pokemonList].filter(dato => dato.name.toLowerCase().includes(buscador.value.toLowerCase())))
+		setFilteredList([...allPokemons].filter(dato => dato.name.toLowerCase().includes(buscador.value.toLowerCase())))
 		setPeticionRealizada(true)
 		context.setVerPokeList(true)
 	}
@@ -35,13 +24,12 @@ const Buscador = () => {
 	const buscarPokemon = () => {
 		setCount(0)
 		setFirstNum([1, 2, 3, 4, 5, 6])
-		getListPokemons()
 		const buscador = document.querySelector("#inputBuscar");
 		setPokemonSelec(buscador.value);
 		if (buscador.value === "") context.setVerPokeList(true);
 		setPeticionRealizada(true);
 		context.setVerPokeList(true)
-		setFilteredList([...pokemonList].filter(dato => dato.name.toLowerCase().includes(buscador.value.toLowerCase())))
+		setFilteredList([...allPokemons].filter(dato => dato.name.toLowerCase().includes(buscador.value.toLowerCase())))
 	};
 
 	useEffect(() => {
@@ -57,7 +45,7 @@ const Buscador = () => {
 				}
 			});
 		}
-	}, [pokemonSelec, peticionRealizada, pokemonList]);
+	}, [pokemonSelec, peticionRealizada]);
 
 	return (
 		<div className='buscador'>

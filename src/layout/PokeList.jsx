@@ -84,10 +84,13 @@ const PokeList = () => {
 	return (
 		<div className='pokelistContainer'>
 			<div className='pokeList'>
-				{listPokemons &&
+				{
 					listPokemons.map((el, i) => {
 						if (i + 1 >= lengthBatch.initBatch && i < lengthBatch.endBatch) return (<PokeItem key={el.name} data={el} />)
 					})
+				}
+				{
+					console.log(listPokemons)
 				}
 				{!listPokemons && <div>Pokemon no encontrado</div>}
 			</div>

@@ -20,6 +20,7 @@ export default function MiContextoProveedor({ children }) {
 	})
 	const [count, setCount] = useState(1)
 	const [firstNum, setFirstNum] = useState([1, 2, 3, 4, 5, 6])
+	const [allPokemons, setAllPokemons] = useState(null)
 
 	return (
 		<MiContexto.Provider
@@ -49,7 +50,9 @@ export default function MiContextoProveedor({ children }) {
 				count,
 				setCount,
 				firstNum,
-				setFirstNum
+				setFirstNum,
+				allPokemons,
+				setAllPokemons
 			}}>
 			{children}
 		</MiContexto.Provider>

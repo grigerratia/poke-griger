@@ -1,0 +1,7 @@
+.chargingContainer {
+  background-color: aliceblue;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-content: center;
+}
