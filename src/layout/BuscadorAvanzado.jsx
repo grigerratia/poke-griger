@@ -28,7 +28,7 @@ const BuscadorAvanzado = () => {
 		<div className='containerContendorAvanzado'>
 			<div className='buscadorAvanzado'>
 				<span className='btnSalirAv' onClick={toggleOpAv}>
-					<img src='../../public/img/equis.png' alt='salir del modal' />
+					<img src='./img/equis.png' alt='salir del modal' />
 				</span>
 				<div className='buscadorOpciones'>
 					<div className='tipDebRan'>
