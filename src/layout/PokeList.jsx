@@ -2,13 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import PokeItem from "../Components/PokeItem";
 import { MiContexto } from "../context/context";
 import { getPokemon } from "../utils/getPokemon";
-
-
 import "../styles/PokeList.css";
 
 const PokeList = () => {
 	const context = useContext(MiContexto);
 	const numStyles = { border: "solid 1px #484747", borderRadius: "8px" }
+	let displayedList = ""
 	const { filteredList, listPokemons, setListPokemons, lengthBatch, setLengthBatch, count, setCount, firstNum, setFirstNum } = context;
 
 	//siguiente y anterior lote de la lista de pokemons por números
@@ -86,10 +85,13 @@ const PokeList = () => {
 			<div className='pokeList'>
 				{
 					listPokemons.map((el, i) => {
-						if (i + 1 >= lengthBatch.initBatch && i < lengthBatch.endBatch) return (<PokeItem key={el.name} data={el} />)
+						if (i + 1 >= lengthBatch.initBatch && i < lengthBatch.endBatch) {
+							return (<PokeItem key={el.name} data={el} />)
+						}
 					})
 				}
-				{!listPokemons && <div>Pokemon no encontrado</div>}
+
+
 			</div>
 
 			<div className='listIndex'>
