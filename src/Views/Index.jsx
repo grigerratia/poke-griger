@@ -21,7 +21,6 @@ const Index = () => {
 			.then(res => res.json())
 			.then(data => {
 				setAllPokemons(data.results)
-				console.log(data.results);
 			})
 
 	}, [])

@@ -8,7 +8,7 @@ const PokeList = () => {
 	const context = useContext(MiContexto);
 	const numStyles = { border: "solid 1px #484747", borderRadius: "8px" }
 	let displayedList = ""
-	const { filteredList, listPokemons, setListPokemons, lengthBatch, setLengthBatch, count, setCount, firstNum, setFirstNum } = context;
+	const { allPokemons, filteredList, listPokemons, setListPokemons, lengthBatch, setLengthBatch, count, setCount, firstNum, setFirstNum } = context;
 
 	//siguiente y anterior lote de la lista de pokemons por números
 	const navNum = (num) => {
@@ -78,7 +78,7 @@ const PokeList = () => {
 					setListPokemons(data.results);
 				})
 			: setListPokemons(filteredList);
-	}, [filteredList]);
+	}, [filteredList, allPokemons]);
 
 	return (
 		<div className='pokelistContainer'>
