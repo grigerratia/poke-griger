@@ -7,4 +7,14 @@ nav ul {
 li {
 	list-style: none;
 	cursor: pointer;
+	color: #767676;
+	transition: all 0.2s;
+
+	&:hover {
+		color: white;
+		border-bottom: 1px solid #fff;
+	}
+	&:active {
+		color: #d02222;
+	}
 }
