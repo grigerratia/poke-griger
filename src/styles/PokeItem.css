@@ -1,3 +1,6 @@
+.pokeItemContainer {
+	position: relative;
+}
 .pokeItem {
 	position: relative;
 	width: 150px;
@@ -48,35 +51,36 @@
 		}
 	}
 
-	& .addFavorite {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		width: 18px;
-		height: 18px;
-		cursor: pointer;
-		z-index: 1;
-
-		& img {
-			width: 16px;
-			transition: all 0.1s;
-
-			&:hover {
-				width: 18px;
-				filter: drop-shadow(0px 0 2px #FF1616);
-			}
-		}
-	}
-
 	&:hover {
 		box-shadow: 10px 0 16px #545240;
 		transform: translateX(-10px);
 	}
-
+	
 	&:active {
 		transform: scale(1.5);
 	}
-
+	
 	/* &:hover picture img {
 	} */
 }
+
+.addFavorite {
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	z-index: 1;
+
+	& img {
+		width: 16px;
+		transition: all 0.1s;
+
+		&:hover {
+			width: 18px;
+			filter: drop-shadow(0px 0 2px #FF1616);
+		}
+	}
+}
+

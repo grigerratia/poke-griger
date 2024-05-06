@@ -15,8 +15,15 @@ const PokeItem = ({ data }) => {
 	const { setDataCard, setVerPokeList } = context;
 
 
-	const addToFavorites = () => {
-		alert("Añadir a favoritos")
+	const addToFavorites = (namePokemon) => {
+		if (localStorage.getItem("Favorites")) {
+			const favorites = JSON.parse(localStorage.getItem("Favorites"))
+			favorites.push(namePokemon)
+			localStorage.setItem("Favorites", JSON.stringify(favorites))
+			return
+		}
+		const favorites = [namePokemon]
+		localStorage.setItem("Favorites", JSON.stringify(favorites))
 	}
 
 
@@ -42,23 +49,30 @@ const PokeItem = ({ data }) => {
 	}, []);
 
 	return (
-		<div className='pokeItem' onClick={verCard}>
-			<div className='datosItem'>
-				<p className='nombre'>{dataP?.name}</p>
-				<p className='numero'>{"#" + dataP?.id}</p>
+		<>
+			<div className="pokeItemContainer">
+				<div className='pokeItem' onClick={verCard}>
+					<div className='datosItem'>
+						<p className='nombre'>{dataP?.name}</p>
+						<p className='numero'>{"#" + dataP?.id}</p>
+					</div>
+					<picture>
+						<img
+							src={image}
+							alt={dataP?.name}
+						/>
+					</picture>
+				</div>
+				<div className="addFavorite"
+					onClick={(event) => {
+						event.stopPropagation();
+						addToFavorites(dataP?.name);
+					}}><img src="./img/corazon-lleno.png" alt="" />
+				</div>
+
+
 			</div>
-			<picture>
-				<img
-					src={image}
-					alt={dataP?.name}
-				/>
-			</picture>
-			<div className="addFavorite"
-				onClick={(event) => {
-					event.stopPropagation();
-					addToFavorites();
-				}}><img src="./img/corazon-vacio.png" alt="" /></div>
-		</div>
+		</>
 	);
 };
 
