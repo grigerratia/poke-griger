@@ -4,6 +4,7 @@ import Header from '../layout/Header'
 import Charging from './Charging'
 import PokeCard from '../Components/PokeCard'
 import { MiContexto } from '../context/context'
+import PreferCard from '../layout/PreferCard'
 import '../styles/Favoritos.css'
 
 const DataR = ({ name }) => {
@@ -41,8 +42,8 @@ const Favorites = () => {
       <div className='favoritos'>
         <div className="layoutFavoritos">
           {
-            favorites?.map(pokemon => {
-              return <DataR key={pokemon.name} name={pokemon.name} />
+            favorites?.map(elem => {
+              return <PreferCard key={elem.name} pokemon={elem} />
             })
           }
         </div>

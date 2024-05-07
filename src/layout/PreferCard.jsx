@@ -1,33 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/PokeCard.css";
 
-const PreferCard = (pokemon) => {
+const PreferCard = ({ pokemon }) => {
 
+  const [image, setImage] = useState("");
   const { name, types, abilities } = pokemon;
 
-  let image =
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" +
-    id +
-    ".gif";
-
-  const togglePoDe = () => {
-    context.verPokeDe
-      ? context.setVerPokeDe(false)
-      : context.setVerPokeDe(true)
-  };
-
-  const close = () => {
-    context.setVerPokeList(true)
-  }
+  useEffect(() => {
+    pokemon.sprites.other["showdown"].front_default
+      ? setImage(pokemon.sprites.other["showdown"].front_default)
+      : setImage(pokemon.sprites.other["official-artwork"].front_default)
+  }, [])
 
   return (
     <>
       <div
-        key={types[0].type.name}
-        className={"content-card" + " " + types[0]?.type.name}
-        onClick={togglePoDe}>
+        key={types[0]?.type.name}
+        className={"content-card" + " " + types[0]?.type.name}>
         <picture>
-          <img src={img} alt={name} />
+          <img src={image} alt={name} />
         </picture>
         <div className='card-details'>
           <h3>{name}</h3>
@@ -49,7 +40,6 @@ const PreferCard = (pokemon) => {
       </div>
       <div className="cardOptions" >
         <div><img src="./img/corazon-lleno.png" alt="" /></div>
-        <div onClick={close}>❌</div>
       </div>
     </>
   );
