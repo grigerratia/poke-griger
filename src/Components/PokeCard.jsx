@@ -4,7 +4,7 @@ import "../styles/PokeCard.css";
 
 const PokeCard = () => {
 	const context = useContext(MiContexto);
-	const { dataCard, setLengthBatch } = context;
+	const { dataCard } = context;
 
 	const { name, types, abilities, id } = dataCard;
 
@@ -51,7 +51,7 @@ const PokeCard = () => {
 				</div>
 			</div>
 			<div className="cardOptions" >
-				<div>🧡</div>
+				<div><img src="./img/corazon-lleno.png" alt="" /></div>
 				<div onClick={close}>❌</div>
 			</div>
 		</>

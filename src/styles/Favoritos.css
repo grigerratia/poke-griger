@@ -16,6 +16,7 @@ Header {
     height: 340px;
     border-radius: 8px;
     box-shadow: 1px 1px 3px #fff;
+    color: #fff;
   }
 }
 & .botonAtras {

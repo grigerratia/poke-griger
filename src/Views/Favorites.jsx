@@ -6,41 +6,44 @@ import PokeCard from '../Components/PokeCard'
 import { MiContexto } from '../context/context'
 import '../styles/Favoritos.css'
 
-const DataR = (name) => {
+const DataR = ({ name }) => {
   return (
-    <div className="r">[{name}]</div>
+    <div className="r">{name}</div>
   )
 }
 
 const Favorites = () => {
 
   const context = useContext(MiContexto);
-  const { allPokemons, favorites, setFavorites } = context
+  const { favorites, setFavorites } = context
   const [listFavoritesPokemons, setListFavoritesPokemons] = useState([])
+  const dataFavoritesPokemons = JSON.parse(localStorage.getItem("Favorites"))
 
-  const irAHome = () => {
+  const goToHome = () => {
     location.href = '/';
   }
 
-  const dataFavoritesPokemons = JSON.parse(localStorage.getItem("Favorites"))
-  dataFavoritesPokemons.map(namePokemon => {
-    getPokemon(namePokemon)
-      .then(res => res.json())
-      .then(data => {
-        setListFavoritesPokemons([...listFavoritesPokemons].push(data))
-      })
-  });
+  useEffect(() => {
+    dataFavoritesPokemons?.map(namePokemon => {
+      getPokemon(namePokemon)
+        .then(res => res.json())
+        .then(data => setListFavoritesPokemons(listFavoritesPokemons.push(data)))
+    });
+    setFavorites(listFavoritesPokemons)
+  }, [])
 
   return (
     <>
       <Header />
-      <div className="botonAtras" onClick={irAHome} >
+      <div className="botonAtras" onClick={goToHome} >
         Ir atrás
       </div>
       <div className='favoritos'>
         <div className="layoutFavoritos">
           {
-            console.log(listFavoritesPokemons)
+            favorites?.map(pokemon => {
+              return <DataR key={pokemon.name} name={pokemon.name} />
+            })
           }
         </div>
       </div>
