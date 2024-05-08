@@ -7,16 +7,9 @@ Header {
   & .layoutFavoritos {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 2em;
-  }
-  & .r {
-    width: 240px;
-    height: 340px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 3px #fff;
-    color: #fff;
   }
 }
 & .botonAtras {

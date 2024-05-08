@@ -1,0 +1,78 @@
+@import "./color-types.css";
+
+.baby {
+  width: 40px;
+  height: 40px;
+}
+.small {
+  width: 60px;
+  height: 60px;
+}
+.big {
+  width: 80px;
+  height: 80px;
+}
+.monster {
+  width: 120px;
+  height: 120px;
+}
+.monument {
+  width: 200px;
+  height: 200px;
+}
+
+.content-preferCard {
+  width: 250px;
+  height: 270px;
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1em;
+
+  & picture img {
+    filter: drop-shadow(0 0 5px #ccc);
+
+    & .baby {
+      width: 40px;
+      height: 40px;
+    }
+    & .small {
+      width: 60px;
+      height: 60px;
+    }
+    & .big {
+      width: 80px;
+      height: 80px;
+    }
+    & .monster {
+      width: 120px;
+      height: 120px;
+    }
+    & .monument {
+      width: 200px;
+      height: 200px;
+    }
+
+  }
+
+  & .preferCard-details {
+    color: #ccc;
+
+    & h5 {
+      margin: 0;
+    }
+
+    & .preferCardOptions {
+      display: flex;
+      gap: 8px;
+
+      & div img {
+        width: 16px
+      }
+    }
+  }
+
+}

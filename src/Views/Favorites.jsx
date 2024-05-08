@@ -1,17 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { getPokemon } from '../utils/getPokemon'
 import Header from '../layout/Header'
-import Charging from './Charging'
-import PokeCard from '../Components/PokeCard'
 import { MiContexto } from '../context/context'
 import PreferCard from '../layout/PreferCard'
 import '../styles/Favoritos.css'
-
-const DataR = ({ name }) => {
-  return (
-    <div className="r">{name}</div>
-  )
-}
 
 const Favorites = () => {
 

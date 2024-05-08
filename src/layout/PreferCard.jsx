@@ -1,45 +1,41 @@
 import React, { useEffect, useState } from "react";
-import "../styles/PokeCard.css";
+import '../styles/PreferCard.css'
 
 const PreferCard = ({ pokemon }) => {
 
   const [image, setImage] = useState("");
-  const { name, types, abilities } = pokemon;
+  const { name, height } = pokemon;
+
+  const getSize = () => {
+    if (height < 5) return "baby"
+    if (height > 5 && height < 10) return "small"
+    if (height > 10 && height < 60) return "big"
+    if (height > 60 && height < 100) return "monster"
+    if (height > 100 && height < 200) return "monument"
+  }
 
   useEffect(() => {
     pokemon.sprites.other["showdown"].front_default
       ? setImage(pokemon.sprites.other["showdown"].front_default)
       : setImage(pokemon.sprites.other["official-artwork"].front_default)
-  }, [])
+  }, [image])
 
   return (
     <>
       <div
-        key={types[0]?.type.name}
-        className={"content-card" + " " + types[0]?.type.name}>
-        <picture>
+        key={name}
+        className={"content-preferCard"}
+      >
+        <picture className={() => getSize}>
           <img src={image} alt={name} />
         </picture>
-        <div className='card-details'>
-          <h3>{name}</h3>
-          <div className='card-tipo'>
-            <p>Tipo</p>
-            {types?.map((el) => (
-              <span key={el.type.name} className={el.type.name}>
-                {el.type.name}
-              </span>
-            ))}
-          </div>
-          <div className='card-categoria'>
-            <p>Habilidades</p>
-            {abilities?.map((el) => (
-              <span key={el.ability.name}>{el.ability.name}</span>
-            ))}
+        <div className='preferCard-details'>
+          <h5>{name}</h5>
+          <div className="preferCardOptions" >
+            <div><img src="./img/corazon-lleno.png" alt="" /></div>
+            <div><img src="#" alt="" />°°°</div>
           </div>
         </div>
-      </div>
-      <div className="cardOptions" >
-        <div><img src="./img/corazon-lleno.png" alt="" /></div>
       </div>
     </>
   );
