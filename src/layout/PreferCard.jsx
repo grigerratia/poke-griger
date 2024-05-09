@@ -1,11 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { MiContexto } from "../context/context";
 import '../styles/PreferCard.css'
 
 const PreferCard = ({ pokemon }) => {
 
+  const context = useContext(MiContexto);
+  const { favorites, setFavorites } = context
   const [image, setImage] = useState("");
   const [imgSize, setImgSize] = useState("baby");
+  const [showFavorite, setShowFavorite] = useState("on");
   const { name, height } = pokemon;
+
+  const removeOfFavorites = () => {
+    setShowFavorite("of")
+
+    const actualFavorites = JSON.parse(localStorage.getItem("Favorites"))
+    const newFavorites = actualFavorites.filter((el) => el != name)
+    localStorage.setItem("Favorites", JSON.stringify(newFavorites))
+  }
 
 
   useEffect(() => {
@@ -27,7 +39,7 @@ const PreferCard = ({ pokemon }) => {
     <>
       <div
         key={name}
-        className={"content-preferCard"}
+        className={"content-preferCard" + " " + showFavorite}
       >
         <picture >
           <img src={image} alt={name} className={imgSize} />
@@ -39,8 +51,8 @@ const PreferCard = ({ pokemon }) => {
             <div className="optionsFavorite"><img src="#" alt="" />
               <p>°°°</p>
               <ul>
-                <li>Detalles</li>
-                <li>Quitar de favoritos</li>
+                <li onClick={() => alert("En construcción 🏗")}>Detalles</li>
+                <li onClick={removeOfFavorites}>Quitar de favoritos</li>
               </ul>
             </div>
           </div>

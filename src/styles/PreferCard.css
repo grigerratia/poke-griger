@@ -26,6 +26,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 1em;
+  transition: all 0.2s;
 
   & picture img {
     transition: all 0.2s;
@@ -80,4 +81,8 @@
     filter: drop-shadow(0 0 5px #ccc);
   }
 
+}
+
+.of {
+  display: none;
 }

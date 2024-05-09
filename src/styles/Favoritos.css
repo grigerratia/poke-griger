@@ -2,14 +2,13 @@ Header {
   position: fixed;
 }
 .favoritos {
-  padding: 8em 16em;
+  padding: 8em;
 
   & .layoutFavoritos {
-    width: 100%;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    gap: 2em;
+    gap: 4em;
   }
 }
 & .botonAtras {
