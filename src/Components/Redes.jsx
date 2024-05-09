@@ -13,7 +13,10 @@ const Redes = () => {
 				<li>f</li>
 				<li>in</li>
 				<li>x</li>
-				<li onClick={irAFavorites}>favoritos</li>
+				{
+					!location.pathname.includes("favorites") && <li onClick={irAFavorites}>favoritos</li>
+				}
+
 			</ul>
 		</nav>
 	);

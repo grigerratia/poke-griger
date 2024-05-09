@@ -1,29 +1,24 @@
 @import "./color-types.css";
 
 .baby {
-  width: 40px;
   height: 40px;
 }
 .small {
-  width: 60px;
   height: 60px;
 }
 .big {
-  width: 80px;
-  height: 80px;
+  height: 150px;
 }
 .monster {
-  width: 120px;
-  height: 120px;
+  height: 200px;
 }
 .monument {
-  width: 200px;
-  height: 200px;
+  height: 300px;
 }
 
 .content-preferCard {
-  width: 250px;
-  height: 270px;
+  width: 300px;
+  height: 320px;
   border-radius: 4px;
   padding: 8px;
   display: flex;
@@ -33,29 +28,7 @@
   gap: 1em;
 
   & picture img {
-    filter: drop-shadow(0 0 5px #ccc);
-
-    & .baby {
-      width: 40px;
-      height: 40px;
-    }
-    & .small {
-      width: 60px;
-      height: 60px;
-    }
-    & .big {
-      width: 80px;
-      height: 80px;
-    }
-    & .monster {
-      width: 120px;
-      height: 120px;
-    }
-    & .monument {
-      width: 200px;
-      height: 200px;
-    }
-
+    transition: all 0.2s;
   }
 
   & .preferCard-details {
@@ -64,7 +37,7 @@
     & h5 {
       margin: 0;
     }
-
+    
     & .preferCardOptions {
       display: flex;
       gap: 8px;
@@ -72,7 +45,39 @@
       & div img {
         width: 16px
       }
+
+      & .optionsFavorite {
+        display: flex;
+        flex-direction: column;
+
+        & p {
+          margin: 0;
+          cursor: pointer;
+          z-index: 1;
+
+          &:hover {
+            filter: drop-shadow(0 0 5px #ccc);
+          }
+
+          &:hover + ul {
+            display: block;
+          }
+        }
+        & ul {
+          position: absolute;
+          display: none;
+          margin: 0;
+
+          &:hover {
+            display: block;
+          }
+        }
+      }
     }
+  }
+  
+  &:hover img{
+    filter: drop-shadow(0 0 5px #ccc);
   }
 
 }
