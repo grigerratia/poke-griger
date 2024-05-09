@@ -6,6 +6,7 @@ const PokeItem = ({ data }) => {
 	const [dataP, setDataP] = useState();
 	const [id, setId] = useState("");
 	const [image, setImage] = useState("");
+	const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem("Favorites")));
 	// let image1 =
 	// 	"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" +
 	// 	id +
@@ -17,13 +18,13 @@ const PokeItem = ({ data }) => {
 
 	const addToFavorites = (namePokemon) => {
 		if (localStorage.getItem("Favorites")) {
-			const favorites = JSON.parse(localStorage.getItem("Favorites"))
-			favorites.push(namePokemon)
-			localStorage.setItem("Favorites", JSON.stringify(favorites))
+			setFavorite(JSON.parse(localStorage.getItem("Favorites")))
+			setFavorite(favorite.push(namePokemon))
+			localStorage.setItem("Favorites", JSON.stringify(favorite))
 			return
 		}
-		const favorites = [namePokemon]
-		localStorage.setItem("Favorites", JSON.stringify(favorites))
+		setFavorite([namePokemon])
+		localStorage.setItem("Favorites", JSON.stringify(favorite))
 	}
 
 
@@ -46,7 +47,7 @@ const PokeItem = ({ data }) => {
 					? setImage(dato["showdown"].front_default)
 					: setImage(dato["official-artwork"].front_default)
 			})
-	}, []);
+	}, [favorite]);
 
 	return (
 		<>
@@ -67,7 +68,14 @@ const PokeItem = ({ data }) => {
 					onClick={(event) => {
 						event.stopPropagation();
 						addToFavorites(dataP?.name);
-					}}><img src="./img/corazon-lleno.png" alt="" />
+					}}
+				>
+					{
+						favorite?.find(el => el === dataP?.name)
+							? <img src="./img/corazon.png" alt="" />
+							: <img src="./img/corazon-lleno.png" alt="" />
+					}
+
 				</div>
 
 
