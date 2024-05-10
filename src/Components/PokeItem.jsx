@@ -7,6 +7,7 @@ const PokeItem = ({ data }) => {
 	const [id, setId] = useState("");
 	const [image, setImage] = useState("");
 	const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem("Favorites")));
+	const [corazon, setCorazon] = useState("./img/corazon-lleno.png");
 	// let image1 =
 	// 	"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/" +
 	// 	id +
@@ -14,6 +15,13 @@ const PokeItem = ({ data }) => {
 
 	const context = useContext(MiContexto);
 	const { setDataCard, setVerPokeList } = context;
+
+	const setHartIcon = () => {
+		const thisFavorite = JSON.parse(localStorage.getItem("Favorites"))
+		thisFavorite.find(el => el === dataP?.name)
+			? setCorazon("./img/corazon.png")
+			: setCorazon("./img/corazon-lleno.png")
+	}
 
 
 	const addToFavorites = (namePokemon) => {
@@ -23,10 +31,10 @@ const PokeItem = ({ data }) => {
 			localStorage.setItem("Favorites", JSON.stringify(favorite))
 			return
 		}
-		setFavorite([namePokemon])
+		setFavorite(favorite.push(namePokemon))
 		localStorage.setItem("Favorites", JSON.stringify(favorite))
+		setHartIcon()
 	}
-
 
 	const verCard = () => {
 		setDataCard(dataP);
@@ -47,7 +55,9 @@ const PokeItem = ({ data }) => {
 					? setImage(dato["showdown"].front_default)
 					: setImage(dato["official-artwork"].front_default)
 			})
-	}, [favorite]);
+
+		setHartIcon()
+	}, [dataP]);
 
 	return (
 		<>
@@ -70,12 +80,7 @@ const PokeItem = ({ data }) => {
 						addToFavorites(dataP?.name);
 					}}
 				>
-					{
-						favorite?.find(el => el === dataP?.name)
-							? <img src="./img/corazon.png" alt="" />
-							: <img src="./img/corazon-lleno.png" alt="" />
-					}
-
+					<img src={corazon} />
 				</div>
 
 

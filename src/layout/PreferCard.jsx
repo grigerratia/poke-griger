@@ -27,8 +27,8 @@ const PreferCard = ({ pokemon }) => {
 
     const getSize = () => {
       if (height < 4) setImgSize("baby")
-      if (height > 4 && height < 10) setImgSize("small")
-      if (height > 10 && height < 60) setImgSize("big")
+      if (height > 4 && height < 13) setImgSize("small")
+      if (height > 13 && height < 60) setImgSize("big")
       if (height > 60 && height < 100) setImgSize("monster")
       if (height > 100 && height < 201) setImgSize("monument")
     }
