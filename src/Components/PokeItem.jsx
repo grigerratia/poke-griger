@@ -26,6 +26,14 @@ const PokeItem = ({ data }) => {
 
 	const addToFavorites = (namePokemon) => {
 		if (localStorage.getItem("Favorites")) {
+			const thisFavorite = JSON.parse(localStorage.getItem("Favorites"))
+			if (thisFavorite.includes(dataP?.name)) {
+				const actualFavorites = JSON.parse(localStorage.getItem("Favorites"))
+				const newFavorites = actualFavorites.filter((el) => el != dataP?.name)
+				localStorage.setItem("Favorites", JSON.stringify(newFavorites))
+				setHartIcon()
+				return
+			}
 			setFavorite(JSON.parse(localStorage.getItem("Favorites")))
 			setFavorite(favorite.push(namePokemon))
 			localStorage.setItem("Favorites", JSON.stringify(favorite))
