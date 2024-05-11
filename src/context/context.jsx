@@ -22,6 +22,7 @@ export default function MiContextoProveedor({ children }) {
 	const [firstNum, setFirstNum] = useState([1, 2, 3, 4, 5, 6])
 	const [allPokemons, setAllPokemons] = useState(null)
 	const [favorites, setFavorites] = useState(null)
+	const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem("Favorites")));
 
 	return (
 		<MiContexto.Provider
@@ -55,7 +56,9 @@ export default function MiContextoProveedor({ children }) {
 				allPokemons,
 				setAllPokemons,
 				favorites,
-				setFavorites
+				setFavorites,
+				favorite,
+				setFavorite
 			}}>
 			{children}
 		</MiContexto.Provider>
