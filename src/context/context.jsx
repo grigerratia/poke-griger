@@ -23,6 +23,7 @@ export default function MiContextoProveedor({ children }) {
 	const [allPokemons, setAllPokemons] = useState(null)
 	const [favorites, setFavorites] = useState(null)
 	const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem("Favorites")));
+	const [isFavotiteCNTX, setIsFavoriteCNTX] = useState("./img/corazon-lleno.png")
 
 	return (
 		<MiContexto.Provider

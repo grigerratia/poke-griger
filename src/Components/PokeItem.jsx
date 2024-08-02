@@ -11,12 +11,12 @@ const PokeItem = ({ data }) => {
 	const context = useContext(MiContexto);
 	const { setDataCard, setVerPokeList, favorite, setFavorite } = context;
 
-	const setHartIcon = () => {
-		const thisFavorite = JSON.parse(localStorage.getItem("Favorites"))
-		thisFavorite.find(el => el === dataP?.name)
-			? setCorazon("./img/corazon.png")
-			: setCorazon("./img/corazon-lleno.png")
-	}
+	// const setHartIcon = () => {
+	// 	const thisFavorite = JSON.parse(localStorage.getItem("Favorites"))
+	// 	thisFavorite.find(el => el === dataP?.name)
+	// 		? setCorazon("./img/corazon.png")
+	// 		: setCorazon("./img/corazon-lleno.png")
+	// }
 
 
 	const addToFavorites = (namePokemon) => {
@@ -26,18 +26,18 @@ const PokeItem = ({ data }) => {
 				const actualFavorites = JSON.parse(localStorage.getItem("Favorites"))
 				const newFavorites = actualFavorites.filter((el) => el != namePokemon)
 				localStorage.setItem("Favorites", JSON.stringify(newFavorites))
-				setHartIcon()
+				//setHartIcon()
 				return
 			}
 			setFavorite(JSON.parse(localStorage.getItem("Favorites")))
 			setFavorite(favorite.push(namePokemon))
 			localStorage.setItem("Favorites", JSON.stringify(favorite))
-			setHartIcon()
+			//setHartIcon()
 			return
 		}
 		setFavorite(favorite.push(namePokemon))
 		localStorage.setItem("Favorites", JSON.stringify(favorite))
-		setHartIcon()
+		//setHartIcon()
 	}
 
 	const verCard = () => {
@@ -60,7 +60,7 @@ const PokeItem = ({ data }) => {
 					: setImage(dato["official-artwork"].front_default)
 			})
 
-		setHartIcon()
+		//setHartIcon()
 	}, [dataP, favorite, corazon, id]);
 
 	return (
@@ -84,7 +84,7 @@ const PokeItem = ({ data }) => {
 						addToFavorites(dataP?.name);
 					}}
 				>
-					<img src={corazon} />
+					{/* <img src={corazon} />  */}
 				</div>
 
 

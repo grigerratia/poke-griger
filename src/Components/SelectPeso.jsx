@@ -4,7 +4,7 @@ import "../styles/SelectPeso.css";
 const SelectPeso = () => {
 	return (
 		<div className='selectP'>
-			<h4>Altura</h4>
+			<h4>Peso</h4>
 			<div className='alturas'>
 				<div className='selectAItem'>
 					<img src='./img/peso.png' alt='pequeño' />

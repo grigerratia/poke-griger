@@ -30,13 +30,13 @@
 
 	&:hover {
 		box-shadow: 15px 0 32px #412828;
-		transform: scale(1.1);
+		/* transform: scale(1.1);
 		background: linear-gradient(
 			to bottom right,
 			var(--electric),
 			#171717,
 			#111111
-			);
+			); */
 		}
 		/* &:hover ~ .cardOptions{
 		transform: translateX(-15px);
@@ -82,6 +82,26 @@
 	transition: all 0.2s;
 	& div {
 		cursor: pointer;
+		& img:hover{
+			transform: scale(1.1);
+		}
+		& .openCardP:hover{
+			transform: scale(1.1);
+			
+		}
+	}
+	& img {
+		transition: all 0.2s;
+		width: 24px;
+		height: 24px;
+	}
+	& img:hover{
+		transform: scale(1.1);
+		filter: drop-shadow(0px 0 8px #9b9a8f);
+	}
+	& img[alt='salir del modal']{
+		width: 24px;
+		height: 24px;
 	}
 }
 .card-details {

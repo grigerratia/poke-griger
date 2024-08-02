@@ -3,6 +3,7 @@ import "../styles/RenderTipos.css";
 
 const RenderTipos = () => {
 	let [isTipos, setIsTipos] = useState(null);
+	let [estate, setState] = useState(false)
 	useEffect(() => {
 		fetch("https://pokeapi.co/api/v2/type/")
 			.then((res) => res.json())

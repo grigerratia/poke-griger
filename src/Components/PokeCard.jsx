@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MiContexto } from "../context/context";
 import "../styles/PokeCard.css";
 
 const PokeCard = () => {
 	const context = useContext(MiContexto);
-	const { dataCard } = context;
+	const { dataCard, favorite, setFavorite, isFavoriteCNTX, setIsFavoriteCNTX } = context;
 
 	const { name, types, abilities, id } = dataCard;
+
+	const [favorito, setFavorito] = useState([])
+
+	const [ isFavorite, setIsFavorite] = useState("./img/corazon-lleno.png")
 
 	const img =
 		"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
@@ -21,7 +25,45 @@ const PokeCard = () => {
 
 	const close = () => {
 		context.setVerPokeList(true)
+		setIsFavorite("./img/corazon-lleno.png")
 	}
+
+	const addToFavorites = (namePokemon) => {
+		if (localStorage.getItem("Favorites")) {
+			const thisFavorite = JSON.parse(localStorage.getItem("Favorites"))
+			if (thisFavorite.includes(namePokemon)) {
+				const actualFavorites = JSON.parse(localStorage.getItem("Favorites"))
+				const newFavorites = actualFavorites.filter((el) => el != namePokemon)
+				localStorage.setItem("Favorites", JSON.stringify(newFavorites))
+				//setHartIcon()
+				return
+			}
+			setFavorite(JSON.parse(localStorage.getItem("Favorites")))
+			setFavorite(favorite?.push(namePokemon))
+			setFavorito(JSON.parse(localStorage.getItem("Favorites")))
+			setFavorito(favorito.push(namePokemon))
+			localStorage.setItem("Favorites", JSON.stringify(favorite))
+			//setHartIcon()
+			return
+		}
+		setFavorito(favorito.push(namePokemon))
+		setFavorite(favorite?.push(namePokemon))
+		localStorage.setItem("Favorites", JSON.stringify(favorito))
+		//setHartIcon()
+	}
+
+	useEffect(()=> {
+		const setHartIcon = () => {
+			const thisFavorite = JSON.parse(localStorage.getItem("Favorites"))
+			thisFavorite.find(el => el === name)
+				? setIsFavorite("./img/corazon.png")
+				: null
+		}
+		setHartIcon()
+	}, [isFavorite])
+
+	
+
 
 	return (
 		<>
@@ -51,8 +93,15 @@ const PokeCard = () => {
 				</div>
 			</div>
 			<div className="cardOptions" >
-				<div><img src="./img/corazon-lleno.png" alt="" /></div>
-				<div onClick={close}>❌</div>
+				<div 
+					onClick={(event) => {
+						event.stopPropagation();
+						addToFavorites(name);
+					}}>
+					<img src={isFavorite} alt="" />
+				</div>
+
+				<img onClick={close} src='./img/equis.png' alt='salir del modal' />
 			</div>
 		</>
 	);
