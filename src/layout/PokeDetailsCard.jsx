@@ -48,11 +48,11 @@ const PokeDetailsCard = () => {
 			<div className='pokemonCarateristicas'>
 				<div className='dtPk'>
 					<div className='infItem'>Altura:</div>
-					<div className='indDetails'>250</div>
+					<div className='indDetails'>{dataCard.height}</div>
 				</div>
 				<div className='dtPk'>
 					<div className='infItem'>Categoría:</div>
-					<div className='indDetails'>250</div>
+					<div className='indDetails'>{dataCard.types[0].type.name}</div>
 				</div>
 				<div className='dtPk'>
 					<div className='infItem'>Peso:</div>
