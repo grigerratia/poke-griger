@@ -8,6 +8,7 @@ const PokeDetailsCard = () => {
 	const { types } = dataCard;
 	const [description, setDescription] = useState("");
 
+	console.log(dataCard.weight)
 
 	useEffect(() => {
 		fetch(dataCard.species?.url).then((res) => {
@@ -55,11 +56,11 @@ const PokeDetailsCard = () => {
 				</div>
 				<div className='dtPk'>
 					<div className='infItem'>Peso:</div>
-					<div className='indDetails'>250</div>
+					<div className='indDetails'>{dataCard.weight}</div>
 				</div>
 				<div className='dtPk'>
 					<div className='infItem'>Habilidad:</div>
-					<div className='indDetails'>250</div>
+					<div className='indDetails'>{dataCard.abilities[0].ability.name}</div>
 				</div>
 				<div className='dtPk'>
 					<div className='infItem'>Sexo:</div>
