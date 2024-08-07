@@ -62,10 +62,10 @@ const PokeDetailsCard = () => {
 					<div className='infItem'>Habilidad:</div>
 					<div className='indDetails'>{dataCard.abilities[0].ability.name}</div>
 				</div>
-				<div className='dtPk'>
+				{/* <div className='dtPk'>
 					<div className='infItem'>Sexo:</div>
 					<div className='indDetails'>250</div>
-				</div>
+				</div> */}
 			</div>
 			<PokemonFigth />
 			<div className='pokeDebilidad'>
