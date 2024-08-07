@@ -68,10 +68,10 @@ const PokeDetailsCard = () => {
 				</div> */}
 			</div>
 			<PokemonFigth />
-			<div className='pokeDebilidad'>
+			{/* <div className='pokeDebilidad'>
 				<h4>Debilidad</h4>
 				<span>Fuego</span>
-			</div>
+			</div> */}
 		</div>
 	);
 };
