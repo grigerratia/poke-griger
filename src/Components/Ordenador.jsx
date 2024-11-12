@@ -9,7 +9,7 @@ const Ordenador = () => {
 	const { setFilteredList, filteredList, allPokemons } = context
 
 	//ORDENA DESDE EL NÚMERO MENOR AL MAYOR
-	const orderSup = () => {
+	const orderInf = () => {
 		if (filteredList === false) {
 			setFilteredList([...allPokemons].sort((a, b) => {
 				if (getIdOfUrl(a.url) < getIdOfUrl(b.url)) { return -1; }
@@ -24,8 +24,8 @@ const Ordenador = () => {
 		}))
 	}
 
-	//ORDENA DESDE EL MAYOR MENOR AL MENOR
-	const orderInf = () => {
+	//ORDENA DESDE EL MAYOR AL MENOR
+	const orderSup = () => {
 		if (filteredList === false) {
 			setFilteredList([...allPokemons].sort((a, b) => {
 				if (getIdOfUrl(a.url) < getIdOfUrl(b.url)) { return 1; }
