@@ -10,7 +10,7 @@ const PokeCard = () => {
 
 	const [favorito, setFavorito] = useState([])
 
-	const [ isFavorite, setIsFavorite] = useState("./img/corazon-lleno.png")
+	const [isFavorite, setIsFavorite] = useState("./img/corazon-lleno.png")
 
 	const img =
 		"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
@@ -52,17 +52,17 @@ const PokeCard = () => {
 		//setHartIcon()
 	}
 
-	useEffect(()=> {
+	useEffect(() => {
 		const setHartIcon = () => {
 			const thisFavorite = JSON.parse(localStorage.getItem("Favorites"))
 			thisFavorite.find(el => el === name)
 				? setIsFavorite("./img/corazon.png")
 				: null
 		}
-		setHartIcon()
+		///setHartIcon()
 	}, [isFavorite])
 
-	
+
 
 
 	return (
@@ -93,7 +93,7 @@ const PokeCard = () => {
 				</div>
 			</div>
 			<div className="cardOptions" >
-				<div 
+				<div
 					onClick={(event) => {
 						event.stopPropagation();
 						addToFavorites(name);
