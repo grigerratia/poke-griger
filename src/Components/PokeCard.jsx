@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MiContexto } from "../context/context";
+import { getIdOfUrl } from "../utils/getIdOfUrl";
 import "../styles/PokeCard.css";
 
 const PokeCard = () => {
@@ -16,6 +17,7 @@ const PokeCard = () => {
 		"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
 		id +
 		".png";
+
 
 	const togglePoDe = () => {
 		context.verPokeDe
@@ -60,6 +62,11 @@ const PokeCard = () => {
 				: null
 		}
 		///setHartIcon()
+
+		const urlTypes = types?.map(el => el.url)
+		console.log(urlTypes);
+
+
 	}, [isFavorite])
 
 

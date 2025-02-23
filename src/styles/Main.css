@@ -1,18 +1,21 @@
 main {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	padding: 6em 8em;
+	/* display: grid;
+	grid-template-columns: 1fr 1fr; */
+	display: flex;
+	justify-content: center;
+	padding-top: 40px;
+	flex-wrap: wrap;
 	align-items: center;
 
 	& .botones {
 		display: flex;
-		gap: 4rem;
-		margin-bottom: 2em;
+		gap: 40px;
+		margin-bottom: 40px;
 	}
 
 	& button,
 	select {
-		padding: 1em;
+		padding: 20px;
 		border-radius: 8px;
 		font-size: 16px;
 		border: 1px solid black;
@@ -24,20 +27,22 @@ main {
 	}
 
 	& .main-d {
-		padding-left: 8em;
-
+		padding-left: 60px;
+		display: grid;
+		align-items: center;
+/* 
 		& .cards-layout {
 			margin-top: 4em;
-		}
+		} */
 	}
 }
 
 .titlePage {
 	color: white;
-	line-height: 4em;
+	line-height: 3em;
 
 	& h1 {
-		font-size: 4em;
+		font-size: 3em;
 		margin: 0;
 
 		& span {
@@ -48,7 +53,7 @@ main {
 	}
 
 	& p {
-		font-size: 1.5em;
+		font-size: 1em;
 		line-height: 1.2em;
 		color: #717171;
 	}

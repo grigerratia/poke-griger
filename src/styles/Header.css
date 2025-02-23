@@ -1,7 +1,6 @@
 header {
-	position: fixed;
-	width: 100%;
-	padding: 1rem 3rem;
+	/* position: fixed; */
+	padding: 16px 60px;
 	background-color: #0d0707;
 	display: flex;
 	flex-direction: row;
@@ -12,7 +11,7 @@ header {
 	& picture img {
 		cursor: pointer;
 		transition: all 0.2s;
-		
+
 		&:hover {
 			transform: rotate(360deg);
 		}

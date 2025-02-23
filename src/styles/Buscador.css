@@ -12,13 +12,13 @@
 	& span {
 		width: max-content;
 		height: max-content;
-		padding: 1.5em;
+		padding: 1em;
 		display: flex;
 		align-items: center;
 		border-radius: 8px 0 0 8px;
 
 		& img {
-			width: 30px;
+			width: 24px;
 		}
 	}
 	& input {
@@ -29,7 +29,7 @@
 		outline: none;
 		transition: all 0.2s;
 
-		font-size: 1.5em;
+		font-size: 1em;
 	}
 	& input::placeholder {
 		color: #4f4f4f;
@@ -45,11 +45,11 @@
 		position: absolute;
 		background-image: url(/img/equis.svg);
 		background-size: cover;
-		width: 20px;
-		height: 20px;
+		width: 16px;
+		height: 16px;
 		margin: 8px;
 		padding: 4px;
-		transition: all 0.2s;
+		transition: all 0.1s;
 		
 		&:hover {
 			background-image: url(/img/equis_roja.svg);

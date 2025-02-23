@@ -1,5 +1,16 @@
 .footer {
 	position: fixed;
 	bottom: 0;
-	padding: 1em;
+	padding: 16px 60px;
+
+	& a {
+		color: #cacaca;
+		text-decoration: none;
+		transition: all 0.1s;
+	}
+
+	& a:hover {
+		color: #f0f0f0;
+		cursor: pointer;
+	}
 }

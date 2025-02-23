@@ -23,7 +23,7 @@ const Main = () => {
 						<span>Marca</span> tus favoritos
 					</h1>
 					<p>
-						Ordena la lista de tus pokemon, explora la búsqueda avanzada y marca
+						Ordena la lista de tus pokemon, explora la búsqueda avanzada <br /> y marca
 						tus Pokemons favoritos.
 					</p>
 				</div>
