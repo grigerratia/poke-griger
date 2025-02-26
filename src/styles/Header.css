@@ -1,7 +1,8 @@
+@import "../index.css";
+
 header {
-	/* position: fixed; */
 	padding: 16px 60px;
-	background-color: #0d0707;
+	background-color: #1a1d22;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

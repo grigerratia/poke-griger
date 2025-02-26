@@ -4,6 +4,7 @@
 .pokeItem {
 	position: relative;
 	width: 150px;
+	height: 45px;
 	border-radius: 8px;
 	box-shadow: 0px 0 5px #46453c;
 	padding: 0.9em;
@@ -13,7 +14,8 @@
 	align-items: center;
 	gap: 1.5em;
 	cursor: pointer;
-	transition: all 0.2s;
+	transition: all 0.1s;
+	text-transform: capitalize;
 
 	& .datosItem {
 		height: 100%;
@@ -52,12 +54,12 @@
 	}
 
 	&:hover {
-		box-shadow: 10px 0 16px #545240;
-		transform: translateX(-10px);
+		box-shadow: 10px 0 8px #545240;
+		transform: translateX(-8px);
 	}
 	
 	&:active {
-		transform: scale(1.5);
+		transform: scale(1.1);
 	}
 	
 	/* &:hover picture img {

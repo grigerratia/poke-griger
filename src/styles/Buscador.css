@@ -1,7 +1,9 @@
+@import "../index.css";
+
 .buscador {
-	border-bottom: 2px solid #fc1111;
+	border-bottom: 2px solid var(--primary-color);
 	border-radius: 8px;
-	border-color: #fc1111;
+	border-color: var(--primary-color);
 	width: max-content;
 	display: flex;
 	flex-direction: row-reverse;
@@ -24,21 +26,21 @@
 	& input {
 		border: none;
 		border-radius: 0 8px 8px 0;
-		background-color: #00000000;
-		color: azure;
+		background-color: var(--primary-bg);
+		color: var(--white);
 		outline: none;
 		transition: all 0.2s;
 
 		font-size: 1em;
 	}
 	& input::placeholder {
-		color: #4f4f4f;
+		color: var(--black);
 	}
 	& input:focus ~ span {
-		background-color: #110f0f;
+		background-color: var(--primary-bg)
 	}
 	& input:focus {
-		background-color: #110f0f;
+		background-color: var(--primary-bg);
 	}
 
 	& .xBuscador{

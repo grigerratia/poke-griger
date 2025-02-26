@@ -1,3 +1,5 @@
+@import "../index.css";
+
 nav ul {
 	display: flex;
 	flex-direction: row;
@@ -7,7 +9,7 @@ nav ul {
 li {
 	list-style: none;
 	cursor: pointer;
-	color: #767676;
+	color: var(--white);
 	transition: all 0.2s;
 
 	&:hover {
