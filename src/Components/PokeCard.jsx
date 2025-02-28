@@ -86,7 +86,7 @@ const PokeCard = () => {
 					<div className='card-tipo'>
 						<p>Tipo</p>
 						{types?.map((el) => (
-							<span key={el.type.name} className={el.type.name}>
+							<span key={el.type.name} className={"type-" + el.type.name}>
 								{el.type.name}
 							</span>
 						))}
